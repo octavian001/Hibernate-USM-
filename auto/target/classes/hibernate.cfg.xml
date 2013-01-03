@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://216.218.192.170/octavian_service</property>
+        <property name="hibernate.connection.username">octavian_test</property>
+           <property name="hibernate.connection.password">test123</property>
+            <property name="connection.pool_size">1</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="current_session_context_class">thread</property>
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        <property name="show_sql">true</property>
+        <property name="hbm2ddl.auto">validate</property>
+        
+        <mapping class="com.service.auto.AUTO"/>
+        <mapping class="com.service.auto.BON"/>
+        <mapping class="com.service.auto.MARCA"/>
+        <mapping class="com.service.auto.MECANIC"/>
+        <mapping class="com.service.auto.MODEL"/>
+        <mapping class="com.service.auto.OPERATIE"/>
+        <mapping class="com.service.auto.PIESE"/>
+          <mapping class="com.service.auto.PROPRIETAR"/>
+        
+        <!-- 
+        <mapping class="com.service.auto.bon_oper"/>
+        <mapping class="com.service.auto.PINLOCUIT"/>
+         -->
+          
+	</session-factory>
+
+</hibernate-configuration>
