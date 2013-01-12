@@ -20,10 +20,10 @@ public class MECANIC {
 	@Column(name = "id_mecanic")
 	private Integer id_mecanic = null;
 	
-	@Column(name = "nume", unique = true, nullable = false)
+	@Column(name = "nume", unique = false, nullable = false)
 	private String nume = null;
 	
-	@Column(name = "prenume", unique = true, nullable = false)
+	@Column(name = "prenume", unique = false, nullable = false)
 	private String prenume = null;
 	
 	@Column(name = "telefon", unique = true, nullable = false)

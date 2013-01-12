@@ -1,6 +1,8 @@
 package com.service.auto;
 
+import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.hibernate.Criteria;
@@ -8,13 +10,36 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-
-import com.service.auto.HibernateUtil;
+import org.hibernate.mapping.Collection;
 
 public class Main {
 
 	public static void main(String a[]) {
 		
+		 java.util.Collection<PROPRIETAR> marca = Factory.getInstance().getProprietarDAO().getAllProprietar();
+		    Iterator iterator = marca.iterator();
+		while(iterator.hasNext()){
+			PROPRIETAR m = (PROPRIETAR) iterator.next();
+			System.out.println(m.getNume()+","+m.getTelefon());
+		}
+		
+		MECANICImplDAO m = new MECANICImplDAO();
+		m.addMecanic(new MECANIC("ALBU", "ION",23, "asd", "saew"));
+	    MECANIC i =	m.getIdByDenumire("ALBU");
+		System.out.print(i.getId_mecanic());
+		/*PROPRIETARImplDAO m = new PROPRIETARImplDAO();
+		PROPRIETAR i = m.getIdByDenumire("ANDREI");
+		System.out.print(i.getId_proprietar());*/
+	//	m.addProprietar(new PROPRIETAR("ANDREI", 22356));
+		/*try {
+			m.updateProprietar(17, "Ion",22356);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+	
+	/*	
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		
 		Transaction transaction = null;
@@ -50,7 +75,7 @@ public class Main {
 			session.save(bon);
 
 			
-			
+		*/	
 			/*
 			PROPRIETAR id = new PROPRIETAR();
 			id.setNume("dgdfg");
@@ -73,7 +98,7 @@ public class Main {
 			auto.setId_proprietar(id);
 			session.save(auto);
 			*/
-			transaction.commit();
+	/*		transaction.commit();
 			
 		}catch(HibernateException e){
 			transaction.rollback();
@@ -84,5 +109,7 @@ public class Main {
 				session.close();
 		}
 
+	}
+	*/
 	}
 }
