@@ -89,7 +89,7 @@ public class MODELImplDAO {
 			    return m;
 			  }
 		 
-		 public void updateModel(Integer id, String m) throws SQLException {
+		 public void updateModel(Integer id, String m, MARCA idm) throws SQLException {
 
 				Session session = null;
 				try {
@@ -98,6 +98,7 @@ public class MODELImplDAO {
 					//if(session.get(MARCA.class, id) != null)
 					MODEL n = (MODEL) session.get(MODEL.class, id);
 					n.setDen_model(m);
+					n.setMarca(idm);
 						session.update(n);
 					session.getTransaction().commit();
 				} catch (Exception e) {

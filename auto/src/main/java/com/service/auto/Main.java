@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.swing.SwingUtilities;
+
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -12,21 +14,46 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.mapping.Collection;
 
+import com.service.auto.Interface.MainFrame;
+
 public class Main {
 
 	public static void main(String a[]) {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new MainFrame();
+			}
+		});
+	}
+}		
+	
+		/*
+		MARCA m1 = new MARCA("Audi");
 		
-		 java.util.Collection<PROPRIETAR> marca = Factory.getInstance().getProprietarDAO().getAllProprietar();
+		MARCAImplDAO m2 = new MARCAImplDAO();
+		m2.addMarca(m1);
+		
+		MARCA marca = Factory.getInstance().getMarcaDAO().getIdByDenumire("Audi");
+		 
+		
+		MODEL m  = new MODEL("Carina", marca);
+		
+		MODELImplDAO model = new MODELImplDAO();
+		model.addModel(m);
+		
+		/* java.util.Collection<OPERATIE> marca = Factory.getInstance().getOperatieDAO().getAllOperatie();
 		    Iterator iterator = marca.iterator();
 		while(iterator.hasNext()){
-			PROPRIETAR m = (PROPRIETAR) iterator.next();
-			System.out.println(m.getNume()+","+m.getTelefon());
+			OPERATIE m = (OPERATIE) iterator.next();
+			System.out.println(m.getDen_oper()+","+m.getPret_oper() );
 		}
 		
-		MECANICImplDAO m = new MECANICImplDAO();
-		m.addMecanic(new MECANIC("ALBU", "ION",23, "asd", "saew"));
-	    MECANIC i =	m.getIdByDenumire("ALBU");
-		System.out.print(i.getId_mecanic());
+		//OPERATIEImplDAO m = new OPERATIEImplDAO();
+//		m.addOperatie(new OPERATIE("oper",2321));
+	  /*  OPERATIE i =	m.getIdByDenumire("oper");
+		System.out.print(i.getId_oper());
+		
+		m.deleteOperatie(9); */
 		/*PROPRIETARImplDAO m = new PROPRIETARImplDAO();
 		PROPRIETAR i = m.getIdByDenumire("ANDREI");
 		System.out.print(i.getId_proprietar());*/
@@ -110,6 +137,5 @@ public class Main {
 		}
 
 	}
-	*/
-	}
-}
+	*/ 
+	

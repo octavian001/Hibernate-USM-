@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -23,8 +25,9 @@ public class MODEL {
 	@Column(name = "den_model", unique = true, nullable = false)
 	private String den_model = null;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="model")
-	private Set <MARCA> marca;
+	 @ManyToOne(cascade = CascadeType.ALL)
+	    @JoinColumn(name="id_marca"/*,referencedColumnName="id_proprietar"*/)
+	private MARCA marca;
 	
 	public MODEL(){
 		
@@ -35,6 +38,12 @@ public class MODEL {
 		this.den_model = den_model;
 	}
 
+	public MODEL(String den_model, MARCA marca) {
+		
+		this.den_model = den_model;
+		this.marca = marca;
+	}
+
 	public Integer getId_model() {
 		return id_model;
 	}
@@ -43,10 +52,7 @@ public class MODEL {
 		return den_model;
 	}
 
-	public Set<MARCA> getMarca() {
-		return marca;
-	}
-
+	
 	public void setId_model(Integer id_model) {
 		this.id_model = id_model;
 	}
@@ -55,10 +61,15 @@ public class MODEL {
 		this.den_model = den_model;
 	}
 
-	public void setMarca(Set<MARCA> marca) {
+	public MARCA getMarca() {
+		return marca;
+	}
+
+	public void setMarca(MARCA marca) {
 		this.marca = marca;
 	}
 
+	
 	
 	
 }

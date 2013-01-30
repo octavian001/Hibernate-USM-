@@ -26,6 +26,9 @@ public class MECANIC {
 	@Column(name = "prenume", unique = false, nullable = false)
 	private String prenume = null;
 	
+	@Column(name = "cnm", unique = true, nullable = false)
+	private String cnm = null;
+	
 	@Column(name = "telefon", unique = true, nullable = false)
 	private Integer telefon = null;
 	
@@ -42,17 +45,26 @@ public class MECANIC {
 		
 	}
 
-	public MECANIC( String nume, String prenume,
+	public MECANIC( String nume, String prenume,String cnm,
 			Integer telefon, String email, String adresa) {
 		
 		this.nume = nume;
 		this.prenume = prenume;
+		this.cnm = cnm;
 		this.telefon = telefon;
 		this.email = email;
 		this.adresa = adresa;
 	}
 
 	
+	public String getCnm() {
+		return cnm;
+	}
+
+	public void setCnm(String cnm) {
+		this.cnm = cnm;
+	}
+
 	public Set<BON> getBon() {
 		return bon;
 	}

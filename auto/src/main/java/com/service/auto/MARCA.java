@@ -24,10 +24,11 @@ public class MARCA {
 
 	@Column(name = "den_marca", nullable = false, unique = true)
 	private String den_marca = null;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="marca")
+	private Set <MODEL> model;
 
-	  @ManyToOne(cascade = CascadeType.ALL)
-	    @JoinColumn(name="id_model"/*,referencedColumnName="id_proprietar"*/)
-	private MODEL model;
+	 
 	
 	public MARCA() {
 
@@ -47,9 +48,6 @@ public class MARCA {
 		return den_marca;
 	}
 
-	public MODEL getModel() {
-		return model;
-	}
 
 	public void setId_marca(Integer id_marca) {
 		this.id_marca = id_marca;
@@ -59,8 +57,13 @@ public class MARCA {
 		this.den_marca = den_marca;
 	}
 
-	public void setModel(MODEL model) {
+	public Set<MODEL> getModel() {
+		return model;
+	}
+
+	public void setModel(Set<MODEL> model) {
 		this.model = model;
 	}
 
+	
 }
