@@ -16,16 +16,18 @@ import org.hibernate.mapping.Collection;
 
 import com.service.auto.Interface.MainFrame;
 
-public class Main {
 
-	public static void main(String a[]) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				new MainFrame();
+		
+		public class Main {
+
+			public static void main(String a[]) {
+				SwingUtilities.invokeLater(new Runnable() {
+					public void run() {
+						new MainFrame();
+					}
+				});
 			}
-		});
-	}
-}		
+		}				
 	
 		/*
 		MARCA m1 = new MARCA("Audi");

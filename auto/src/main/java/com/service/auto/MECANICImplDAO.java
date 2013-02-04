@@ -11,7 +11,7 @@ import org.hibernate.criterion.Restrictions;
 
 public class MECANICImplDAO {
 	
-	public  void addMecanic(MECANIC m) {
+	public  boolean addMecanic(MECANIC m) {
 		Session session = null;
 
 		try {
@@ -19,12 +19,15 @@ public class MECANICImplDAO {
 			session.beginTransaction();
 			session.save(m);
 			session.getTransaction().commit();
+			return true;
 		} catch (Exception e) {
+			  e.printStackTrace();
 			System.out.println("Eroare la aduagarea datelor in tabela MECANIC");
 		}
 		if (session != null && session.isOpen()) {
 			session.close();
 		}
+		return false;
 	}
 	
 	//afisarea tuturor inregistrarilor din tabel

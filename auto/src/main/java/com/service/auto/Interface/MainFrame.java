@@ -25,7 +25,6 @@ import com.service.auto.MECANIC;
 
 public class MainFrame extends JFrame {
 
-	int[] nr = new int[1];
 	ArrayList<MECANIC> mecanic = new ArrayList<MECANIC>();
 	private JMenuBar menuBar;
 	private Font font;
@@ -39,8 +38,6 @@ public class MainFrame extends JFrame {
 	private JMenuItem modelTable;
 	private JMenuItem operatieTable;
 	private JMenuItem pieseTable;
-//	private JTable table = null;
-	private JInternalFrame frame1;
 	private JTable table;
 	private JScrollPane scrollPane;
 
@@ -102,32 +99,25 @@ public class MainFrame extends JFrame {
 
 		menuBar.add(tableMenu);
 		setJMenuBar(menuBar);
-
+ 
 		mecanicTable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// cream fereastra interioara
-				frame1 = new JInternalFrame("MECANIC", false, true, false, true);
-				desktopPane.add(frame1);
-
-				frame1.setSize(900, 600);
-				frame1.setLocation(30, 20);
-			    frame1.setVisible(true);
-				
-				mecanic = (ArrayList<MECANIC>) Factory.getInstance()
-						.getMecanicDAO().getAllMecanic();
-
-				TableModel model = new MyTableModel(mecanic);
-				JTable t = new JTable(model);
-				scrollPane = new JScrollPane(t);
-				frame1.getContentPane().add(scrollPane);
-
+				desktopPane.add(IFrameMecanic.getMecanicFrame());
+			if(!IFrameMecanic.mecanicFrame.isVisible()){
+			    	mecanicTable.setEnabled(false);
+			    } else if(IFrameMecanic.mecanicFrame.isVisible()){
+			    	mecanicTable.setEnabled(true); 
+			       }
+			    }
+		});
+	
+		autoTable.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				desktopPane.add(IFrameAuto.getAutoFrame());
 			}
 		});
-		/* if(frame1.isEnabled()){
-		    	mecanicTable.setEnabled(false);
-		    } else
-		    	mecanicTable.setEnabled(true);
-		setVisible(true); */
+		setVisible(true);
 	}
 }
 
