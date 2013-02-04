@@ -21,7 +21,6 @@ public class MECANICImplDAO {
 			session.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
-			  e.printStackTrace();
 			System.out.println("Eroare la aduagarea datelor in tabela MECANIC");
 		}
 		if (session != null && session.isOpen()) {
