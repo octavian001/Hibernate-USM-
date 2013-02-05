@@ -79,7 +79,11 @@ public class TableModelMecanic implements TableModel {
 
 	//reeditarea coloanelor
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
+<<<<<<< HEAD
 		return false;
+=======
+		return true;
+>>>>>>> ddc63eaf39d3b631d5daa822c71796a89dfae39b
 	}
 
 	public void removeTableModelListener(TableModelListener listener) {
