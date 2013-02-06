@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Set;
 
 import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
 import com.service.auto.*;
 
-public class TableModelMecanic implements TableModel {
+public class TableModelMecanic extends AbstractTableModel {
 	
 	private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
     private List<MECANIC> mec;
@@ -79,11 +80,7 @@ public class TableModelMecanic implements TableModel {
 
 	//reeditarea coloanelor
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-<<<<<<< HEAD
 		return false;
-=======
-		return true;
->>>>>>> ddc63eaf39d3b631d5daa822c71796a89dfae39b
 	}
 
 	public void removeTableModelListener(TableModelListener listener) {

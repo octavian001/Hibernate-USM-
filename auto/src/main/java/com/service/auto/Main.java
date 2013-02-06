@@ -21,11 +21,19 @@ import com.service.auto.Interface.MainFrame;
 		public class Main {
 
 			public static void main(String a[]) {
-				SwingUtilities.invokeLater(new Runnable() {
+			/*	SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
 						new MainFrame();
 					}
-				});
+				}); */
+				
+				java.util.Collection<MECANIC> m = Factory.getInstance().getMecanicDAO().findByNume("nu");
+			    Iterator iterator = m.iterator();
+			while(iterator.hasNext()){
+				MECANIC mec = (MECANIC) iterator.next();
+				System.out.println(mec.getNume()+","+mec.getPrenume() );
+			}
+				
 			}
 		}				
 	

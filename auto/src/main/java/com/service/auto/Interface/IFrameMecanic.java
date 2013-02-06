@@ -2,69 +2,37 @@ package com.service.auto.Interface;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-<<<<<<< HEAD
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-=======
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Panel;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
->>>>>>> ddc63eaf39d3b631d5daa822c71796a89dfae39b
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-<<<<<<< HEAD
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-=======
-import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRootPane;
->>>>>>> ddc63eaf39d3b631d5daa822c71796a89dfae39b
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-<<<<<<< HEAD
-=======
-import javax.swing.table.TableModel;
-import javax.swing.text.Document;
+import javax.swing.table.AbstractTableModel;
 
->>>>>>> ddc63eaf39d3b631d5daa822c71796a89dfae39b
 import TModel.TableModelMecanic;
 
 import com.service.auto.Factory;
 import com.service.auto.MECANIC;
-<<<<<<< HEAD
 
 public class IFrameMecanic extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-
-=======
-import com.service.auto.MECANICImplDAO;
-
-public class IFrameMecanic extends JFrame {
-
->>>>>>> ddc63eaf39d3b631d5daa822c71796a89dfae39b
 	// anuleaza textul din TextField daca s-au salvat datele in tabel
 	public static boolean tfStatus(Boolean status) {
 		if (status) {
@@ -114,51 +82,70 @@ public class IFrameMecanic extends JFrame {
 	private static JTextField tfEmail = null;
 	private static JTextField tfAdresa = null;
 	private static MECANIC mec;
-<<<<<<< HEAD
-	
+
 	private static ArrayList<MECANIC> mecanic = null;
 
-
 	public static JInternalFrame getMecanicFrame() {
 
-		
-=======
-
-	public static JInternalFrame getMecanicFrame() {
-
->>>>>>> ddc63eaf39d3b631d5daa822c71796a89dfae39b
 		if (mecanicFrame == null) {
 			mecanicFrame = new JInternalFrame("MECANIC", false, true, false,
 					true);
 			mecanicFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			mecanicFrame.setSize(900, 600);
-			// mecanicFrame.setLocation(30, 20);
+			mecanicFrame.setLocation(30, 20);
 			mecanicFrame.setVisible(true);
 
-<<<<<<< HEAD
-			 mecanic = (ArrayList<MECANIC>) Factory
-=======
-			ArrayList<MECANIC> mecanic = (ArrayList<MECANIC>) Factory
->>>>>>> ddc63eaf39d3b631d5daa822c71796a89dfae39b
-					.getInstance().getMecanicDAO().getAllMecanic();
+			mecanic = (ArrayList<MECANIC>) Factory.getInstance()
+					.getMecanicDAO().getAllMecanic();
 
 			model = new TableModelMecanic(mecanic);
 			t = new JTable(model);
 
 			// panel for buttons
 			JPanel leftPanel = new JPanel();
-			btnAdd = new JButton("Adaugare");
-			btnEdit = new JButton("Editare");
-			btnDelete = new JButton("Sterge");
+			btnAdd = new JButton("Add");
+			btnEdit = new JButton("Edit");
 			leftPanel.add(btnAdd);
 			leftPanel.add(btnEdit);
-			leftPanel.add(btnDelete);
 
 			JPanel rightPanel = new JPanel();
+			btnDelete = new JButton("Delete");
+			rightPanel.add(btnDelete);
 			btnSave = new JButton("Save");
 			btnSave.setEnabled(false);
 			btnCancel = new JButton("Cancel");
 			btnCancel.setEnabled(false);
+
+			JButton btnUpdate = new JButton("Update");
+			rightPanel.add(btnUpdate);
+
+			btnUpdate.addActionListener(new ActionListener() {
+
+				public void actionPerformed(ActionEvent arg0) {
+
+					try {
+
+						Factory.getInstance()
+								.getMecanicDAO()
+								.updateMecanic(
+										mec.getId_mecanic(),
+										tfNume.getText(),
+										tfPrenume.getText(),
+										tfCnm.getText(),
+										Integer.valueOf(tfTelefon.getText()
+												.toString()),
+										tfEmail.getText(), tfAdresa.getText());
+					} catch (NumberFormatException e) {
+						JOptionPane.showMessageDialog(null,
+								"Nu ati introdus corect datele", " Eroare",
+								JOptionPane.OK_OPTION);
+						e.printStackTrace();
+					} catch (SQLException e) {
+						JOptionPane.showMessageDialog(null, "Eroare! ",
+								" Eroare", JOptionPane.OK_OPTION);
+					}
+				}
+			});
 
 			rightPanel.add(btnSave);
 			rightPanel.add(btnCancel);
@@ -255,10 +242,7 @@ public class IFrameMecanic extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					panel_lb.setVisible(true);
 					btnCancel.setEnabled(true);
-<<<<<<< HEAD
 					mecanicFrame.pack();
-=======
->>>>>>> ddc63eaf39d3b631d5daa822c71796a89dfae39b
 				}
 			});
 
@@ -269,10 +253,7 @@ public class IFrameMecanic extends JFrame {
 				panel_lb.setVisible(false);
 				cancelText();
 				btnCancel.setEnabled(false);
-<<<<<<< HEAD
 				mecanicFrame.pack();
-=======
->>>>>>> ddc63eaf39d3b631d5daa822c71796a89dfae39b
 
 			}
 		});
@@ -281,53 +262,72 @@ public class IFrameMecanic extends JFrame {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MECANIC mec = new MECANIC();
-<<<<<<< HEAD
-				try{
-=======
->>>>>>> ddc63eaf39d3b631d5daa822c71796a89dfae39b
-				mec.setId_mecanic(null);
-				mec.setNume(tfNume.getText());
-				mec.setPrenume(tfPrenume.getText());
-				mec.setCnm(tfCnm.getText());
-				mec.setTelefon(Integer.valueOf(tfTelefon.getText().toString()));
-				mec.setEmail(tfEmail.getText());
-				mec.setAdresa(tfAdresa.getText());
-<<<<<<< HEAD
-				}catch(NumberFormatException e){
-					JOptionPane.showMessageDialog(null,"Nu ati introdus corect datele"," Eroare", JOptionPane.OK_OPTION);
+				try {
+					mec.setId_mecanic(null);
+					mec.setNume(tfNume.getText());
+					mec.setPrenume(tfPrenume.getText());
+					mec.setCnm(tfCnm.getText());
+					mec.setTelefon(Integer.valueOf(tfTelefon.getText()
+							.toString()));
+					mec.setEmail(tfEmail.getText());
+					mec.setAdresa(tfAdresa.getText());
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(null,
+							"Nu ati introdus corect datele", " Eroare",
+							JOptionPane.OK_OPTION);
 				}
-=======
-
->>>>>>> ddc63eaf39d3b631d5daa822c71796a89dfae39b
 				boolean status = Factory.getInstance().getMecanicDAO()
 						.addMecanic(mec);
 				tfStatus(status);
 
-				/*
-				 * ArrayList<MECANIC> mecanic = (ArrayList<MECANIC>)
-				 * Factory.getInstance() .getMecanicDAO().getAllMecanic(); model
-				 * = new TableModelMecanic(mecanic); t = new JTable(model);
-				 * scrollPane = new JScrollPane(t); panel_table.add(scrollPane);
-				 * mecanicFrame.add(panel_table,BorderLayout.PAGE_START);
-				 */
+				mecanicFrame.pack();
 
 			}
 		});
-<<<<<<< HEAD
-		
-		
-        
+
 		btnDelete.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent arg0) {
-					
-				Factory.getInstance().getMecanicDAO().deleteMecanic(mecanic.get(t.getSelectedRow()).getId_mecanic());
+
+				Factory.getInstance()
+						.getMecanicDAO()
+						.deleteMecanic(
+								mecanic.get(t.getSelectedRow()).getId_mecanic());
+
+				// sterge rindul din JTable
+				mecanic.remove(mecanic.get(t.getSelectedRow()));
+				((AbstractTableModel) t.getModel()).fireTableDataChanged();
+				t.repaint();
+				mecanicFrame.pack();
+
 			}
 		});
-		
-=======
 
->>>>>>> ddc63eaf39d3b631d5daa822c71796a89dfae39b
+		btnEdit.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					mec = mecanic.get(t.getSelectedRow());
+					tfNume.setText(mec.getNume());
+					tfPrenume.setText(mec.getPrenume());
+					tfCnm.setText(mec.getCnm());
+					tfTelefon.setText(String.valueOf(mec.getTelefon()
+							.toString()));
+					tfEmail.setText(mec.getEmail());
+					tfAdresa.setText(mec.getAdresa());
+
+					panel_lb.setVisible(true);
+					btnCancel.setEnabled(true);
+				} catch (ArrayIndexOutOfBoundsException e) {
+					JOptionPane.showMessageDialog(null,
+							"Nu ati selectat rindul", " Eroare",
+							JOptionPane.OK_OPTION);
+				}
+
+			}
+
+		});
+
 		// verific daca toate JTextField sunt completate atunci activez btnSave
 		DocumentListener docListener = new DocumentListener() {
 
@@ -364,14 +364,7 @@ public class IFrameMecanic extends JFrame {
 		tfEmail.getDocument().addDocumentListener(docListener);
 		tfAdresa.getDocument().addDocumentListener(docListener);
 
-<<<<<<< HEAD
-	mecanicFrame.pack();	
+		mecanicFrame.pack();
 		return mecanicFrame;
 	}
-	
-=======
-		return mecanicFrame;
-	}
-
->>>>>>> ddc63eaf39d3b631d5daa822c71796a89dfae39b
 }
