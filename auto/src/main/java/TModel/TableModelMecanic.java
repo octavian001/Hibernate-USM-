@@ -80,7 +80,15 @@ public class TableModelMecanic extends AbstractTableModel {
 
 	//reeditarea coloanelor
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
+<<<<<<< HEAD
 		return false;
+=======
+<<<<<<< HEAD
+		return false;
+=======
+		return true;
+>>>>>>> ddc63eaf39d3b631d5daa822c71796a89dfae39b
+>>>>>>> 626b3a3534f88b87e492aaf663083ec1a3294fdf
 	}
 
 	public void removeTableModelListener(TableModelListener listener) {
