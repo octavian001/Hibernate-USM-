@@ -1,10 +1,14 @@
 package com.service.auto;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.security.auth.login.Configuration;
 import javax.swing.SwingUtilities;
 
 import org.hibernate.Criteria;
@@ -21,18 +25,28 @@ import com.service.auto.Interface.MainFrame;
 		public class Main {
 
 			public static void main(String a[]) {
-			/*	SwingUtilities.invokeLater(new Runnable() {
+				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
 						new MainFrame();
 					}
-				}); */
+				});
+				/*
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				session.beginTransaction();
+			Iterator	iterator = session.createSQLQuery("SELECT `COLUMN_NAME`" +
+"FROM `INFORMATION_SCHEMA`.`COLUMNS`" + 
+"WHERE `TABLE_SCHEMA`='octavian_service'" +
+   " AND `TABLE_NAME`='MECANIC';").list().iterator();
+				while(iterator.hasNext()) 
+				System.out.println(iterator.next());
 				
-				java.util.Collection<MECANIC> m = Factory.getInstance().getMecanicDAO().findByNume("nu");
+				*/
+			/*	java.util.ArrayList<MECANIC> m = (ArrayList<MECANIC>) Factory.getInstance().getMecanicDAO().searchByNume("nu");
 			    Iterator iterator = m.iterator();
 			while(iterator.hasNext()){
 				MECANIC mec = (MECANIC) iterator.next();
 				System.out.println(mec.getNume()+","+mec.getPrenume() );
-			}
+			}*/
 				
 			}
 		}				

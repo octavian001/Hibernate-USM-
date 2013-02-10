@@ -15,6 +15,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.TableModel;
 import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
@@ -43,6 +44,7 @@ public class MainFrame extends JFrame {
 
 	public MainFrame() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setTitle("Administration page");
 		setSize(1000, 700);
 		setName("Service-Auto");
 
@@ -99,24 +101,27 @@ public class MainFrame extends JFrame {
 
 		menuBar.add(tableMenu);
 		setJMenuBar(menuBar);
- 
-		mecanicTable.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// cream fereastra interioara
-				desktopPane.add(IFrameMecanic.getMecanicFrame());
-			if(!IFrameMecanic.mecanicFrame.isVisible()){
-			    	mecanicTable.setEnabled(false);
-			    } else if(IFrameMecanic.mecanicFrame.isVisible()){
-			    	mecanicTable.setEnabled(true); 
-			       }
-			    }
-		});
-	
-		autoTable.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				desktopPane.add(IFrameAuto.getAutoFrame());
-			}
-		});
+		         Runnable r = 	new Runnable() {
+					
+					public void run() {
+						
+						mecanicTable.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								// cream fereastra interioara
+								desktopPane.add(IFrameMecanic.getMecanicFrame());
+							    }
+						});	
+					}
+				};
+				(new Thread(r)).start();
+
+
+			autoTable.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					desktopPane.add(IFrameAuto.getAutoFrame());
+				}
+			});		
+		
 		setVisible(true);
 	}
 }

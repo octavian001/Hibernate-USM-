@@ -24,10 +24,16 @@ public class MECANICImplDAO {
 			session.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
+			
+			JOptionPane.showMessageDialog(null,
+					"Nu ati introdus corect datele sau exista deja asa inregistrari in tabel", " Eroare",
+					JOptionPane.OK_OPTION);
 			System.out.println("Eroare la aduagarea datelor in tabela MECANIC");
-		}
+			e.printStackTrace();
+		}finally{
 		if (session != null && session.isOpen()) {
 			session.close();
+		  }
 		}
 		return false;
 	}
@@ -53,7 +59,7 @@ public class MECANICImplDAO {
 		return m;
 	}
 
-	public void deleteMecanic(Integer id) {
+	public boolean deleteMecanic(Integer id) {
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
@@ -61,6 +67,7 @@ public class MECANICImplDAO {
 			MECANIC m = (MECANIC) session.get(MECANIC.class, id);
 			session.delete(m);
 			session.getTransaction().commit();
+			return true;
 		} catch (IllegalArgumentException e1) {
 			JOptionPane.showMessageDialog(null,
 					"Nu exista asa inregistrare in tabel", " Eroare",
@@ -72,6 +79,7 @@ public class MECANICImplDAO {
 				session.close();
 			}
 		}
+		return false;
 	}
 
 	// aflu ID dupa den_marca
@@ -110,7 +118,7 @@ public class MECANICImplDAO {
 		return m;
 	}
 
-	public void updateMecanic(Integer id, String m, String m1, String c,
+	public boolean updateMecanic(Integer id, String m, String m1, String c,
 			Integer t, String e, String a) throws SQLException {
 
 		Session session = null;
@@ -127,6 +135,8 @@ public class MECANICImplDAO {
 			n.setAdresa(a);
 			session.update(n);
 			session.getTransaction().commit();
+			
+			return true;
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(null,
 					"Nu s-au reinoit datele! Mai incercati odata.", " Eroare",
@@ -137,12 +147,13 @@ public class MECANICImplDAO {
 				session.close();
 			}
 		}
+		return false;
 	}
 
 	/* Metode de cautare dupa un anumit cimp din tabela */
 
 	// cauta rezultate dupa cimpul Nume
-	public Collection<MECANIC> findByNume(String nume) {
+	public Collection<MECANIC> searchByNume(String nume) {
 		Session session = null;
 		List<MECANIC> m = new ArrayList<MECANIC>();
 

@@ -32,10 +32,10 @@ public class MECANIC {
 	@Column(name = "telefon", unique = true, nullable = false)
 	private Integer telefon = null;
 	
-	@Column(name = "email", unique = true)
+	@Column(name = "adresa", unique = true, nullable = false)
 	private String email = null;
 	
-	@Column(name = "adresa", unique = true)
+	@Column(name = "email", unique = true, nullable = false)
 	private String adresa = null;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="id_mecanic")
@@ -64,7 +64,7 @@ public class MECANIC {
 	public void setCnm(String cnm) {
 		this.cnm = cnm;
 	}
-
+	
 	public Set<BON> getBon() {
 		return bon;
 	}
@@ -73,10 +73,12 @@ public class MECANIC {
 		this.bon = bon;
 	}
 
+	
 	public Integer getId_mecanic() {
 		return id_mecanic;
 	}
 
+	
 	public String getNume() {
 		return nume;
 	}
@@ -84,15 +86,15 @@ public class MECANIC {
 	public String getPrenume() {
 		return prenume;
 	}
-
+	
 	public Integer getTelefon() {
 		return telefon;
 	}
-
+	
 	public String getEmail() {
 		return email;
 	}
-
+	
 	public String getAdresa() {
 		return adresa;
 	}
