@@ -46,6 +46,7 @@ public class MainFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Administration page");
 		setSize(1000, 700);
+		setLocation(150, 20);
 		setName("Service-Auto");
 
 		// cream fereastra JDesktopPane
@@ -59,7 +60,7 @@ public class MainFrame extends JFrame {
 
 		// dam font meniului
 		font = new Font("Times New Roman", Font.BOLD, 16);
-		fontOptionMenu = new Font("Times New Roman", Font.ITALIC,12);
+		fontOptionMenu = new Font("Times New Roman", Font.ITALIC, 12);
 
 		// adaugam o categorie meniului
 		tableMenu = new JMenu("Table");
@@ -69,60 +70,58 @@ public class MainFrame extends JFrame {
 		mecanicTable = new JMenuItem("MECANIC");
 		mecanicTable.setFont(fontOptionMenu);
 		tableMenu.add(mecanicTable);
-		
+
 		autoTable = new JMenuItem("AUTO");
 		autoTable.setFont(fontOptionMenu);
 		tableMenu.add(autoTable);
-		
+
 		bonTable = new JMenuItem("BON");
 		bonTable.setFont(fontOptionMenu);
 		tableMenu.add(bonTable);
-		
+
 		marcaTable = new JMenuItem("MARCA");
 		marcaTable.setFont(fontOptionMenu);
 		tableMenu.add(marcaTable);
-		
+
 		modelTable = new JMenuItem("MODEL");
 		modelTable.setFont(fontOptionMenu);
 		tableMenu.add(modelTable);
-		
+
 		operatieTable = new JMenuItem("OPERATIE");
 		modelTable.setFont(fontOptionMenu);
 		tableMenu.add(modelTable);
-		
+
 		pieseTable = new JMenuItem("PIESE");
 		pieseTable.setFont(fontOptionMenu);
 		tableMenu.add(pieseTable);
-		
+
 		proprietarTable = new JMenuItem("PROPRIETAR");
 		proprietarTable.setFont(fontOptionMenu);
 		tableMenu.add(proprietarTable);
-	   
 
 		menuBar.add(tableMenu);
 		setJMenuBar(menuBar);
-		         Runnable r = 	new Runnable() {
-					
+
+		mecanicTable.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Runnable r = new Runnable() {
+
 					public void run() {
-						
-						mecanicTable.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								// cream fereastra interioara
-								desktopPane.add(IFrameMecanic.getMecanicFrame());
-							    }
-						});	
+						// cream fereastra interioara
+						desktopPane.add(IFrameMecanic.getMecanicFrame());
 					}
 				};
 				(new Thread(r)).start();
+			}
 
+		});
 
-			autoTable.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					desktopPane.add(IFrameAuto.getAutoFrame());
-				}
-			});		
-		
+		autoTable.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				desktopPane.add(IFrameAuto.getAutoFrame());
+			}
+		});
+
 		setVisible(true);
 	}
 }
-

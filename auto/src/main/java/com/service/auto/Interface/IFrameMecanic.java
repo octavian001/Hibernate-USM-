@@ -98,9 +98,11 @@ public class IFrameMecanic extends JFrame {
 
 	public static JInternalFrame getMecanicFrame() {
 
-		if (mecanicFrame == null) {
+		if (mecanicFrame == null || mecanicFrame.isClosed()) {
+
 			mecanicFrame = new JInternalFrame("MECANIC", false, true, false,
 					true);
+
 			mecanicFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			mecanicFrame.setSize(900, 600);
 			mecanicFrame.setLocation(30, 20);
@@ -222,8 +224,8 @@ public class IFrameMecanic extends JFrame {
 			btnRefresh.setPreferredSize(new Dimension(100, 25));
 			// btnRefresh.setAlignmentX(btnRefresh.RIGHT_ALIGNMENT);
 
-			JPanel panel_refresh = new JPanel();
-			panel_refresh.add(btnRefresh, FlowLayout.LEFT);
+			JPanel panel_refresh = new JPanel(new BorderLayout());
+			panel_refresh.add(btnRefresh, BorderLayout.EAST);
 			panel_table.add(panel_refresh, BorderLayout.PAGE_END);
 			panel_table.add(scrollPane, BorderLayout.CENTER);
 
@@ -243,8 +245,8 @@ public class IFrameMecanic extends JFrame {
 			panel_search.add(cbSearch);
 			panel_search.add(btnSearch);
 
-			panel = new JPanel();
-			panel.add(panel_search, BorderLayout.EAST);
+			panel = new JPanel(new BorderLayout());
+			panel.add(panel_search, BorderLayout.CENTER);
 
 			panel_table.add(panel, BorderLayout.PAGE_START);
 
@@ -274,25 +276,37 @@ public class IFrameMecanic extends JFrame {
 		// adaugare date in DB
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				MECANIC mec = new MECANIC();
-				try {
-					mec.setId_mecanic(null);
-					mec.setNume(tfNume.getText());
-					mec.setPrenume(tfPrenume.getText());
-					mec.setCnm(tfCnm.getText());
-					mec.setTelefon(Integer.valueOf(tfTelefon.getText()
-							.toString()));
-					mec.setEmail(tfEmail.getText());
-					mec.setAdresa(tfAdresa.getText());
-				} catch (NumberFormatException e) {
-					JOptionPane.showMessageDialog(null,
-							"Nu ati introdus corect datele", " Eroare",
-							JOptionPane.OK_OPTION);
-				}
-				boolean status = Factory.getInstance().getMecanicDAO()
-						.addMecanic(mec);
-				tfStatus(status);
 
+				Runnable r = new Runnable() {
+
+					public void run() {
+						MECANIC mec = new MECANIC();
+						try {
+							mec.setId_mecanic(null);
+							mec.setNume(tfNume.getText());
+							mec.setPrenume(tfPrenume.getText());
+							mec.setCnm(tfCnm.getText());
+							mec.setTelefon(Integer.valueOf(tfTelefon.getText()
+									.toString()));
+							mec.setEmail(tfEmail.getText());
+							mec.setAdresa(tfAdresa.getText());
+						} catch (NumberFormatException e) {
+						   }
+						try {
+							boolean status = Factory.getInstance()
+									.getMecanicDAO().addMecanic(mec);
+							tfStatus(status);
+						} catch (Exception e1) {
+							JOptionPane
+									.showMessageDialog(
+											null,
+											"Eroare cu serverul de date, incercati mai tirziu",
+											" Eroare", JOptionPane.OK_OPTION);
+						}
+
+					}
+				};
+				(new Thread(r)).start();
 				mecanicFrame.pack();
 
 			}
@@ -301,19 +315,34 @@ public class IFrameMecanic extends JFrame {
 		btnDelete.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
+				Runnable r = new Runnable() {
 
-				if (Factory
-						.getInstance()
-						.getMecanicDAO()
-						.deleteMecanic(
-								mecanic.get(t.getSelectedRow()).getId_mecanic())) {
-					// sterge rindul din JTable
-					mecanic.remove(mecanic.get(t.getSelectedRow()));
-					((AbstractTableModel) t.getModel()).fireTableDataChanged();
-					t.repaint();
-					mecanicFrame.pack();
-				}
+					public void run() {
+						try {
+							if (Factory
+									.getInstance()
+									.getMecanicDAO()
+									.deleteMecanic(
+											mecanic.get(t.getSelectedRow())
+													.getId_mecanic())) {
+								// sterge rindul din JTable
+								mecanic.remove(mecanic.get(t.getSelectedRow()));
+								((AbstractTableModel) t.getModel())
+										.fireTableDataChanged();
+								t.repaint();
+							}
+						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null,
+									"Selectati un rind!", " Eroare",
+									JOptionPane.OK_OPTION);
+						}
+
+					}
+				};
+				(new Thread(r)).start();
+				mecanicFrame.pack();
 			}
+
 		});
 
 		btnEdit.addActionListener(new ActionListener() {
@@ -346,31 +375,38 @@ public class IFrameMecanic extends JFrame {
 		btnUpdate.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
+				Runnable r = new Runnable() {
 
-				boolean status = false;
-				try {
+					public void run() {
+						boolean status = false;
+						try {
 
-					status = Factory
-							.getInstance()
-							.getMecanicDAO()
-							.updateMecanic(
-									mec.getId_mecanic(),
-									tfNume.getText(),
-									tfPrenume.getText(),
-									tfCnm.getText(),
-									Integer.valueOf(tfTelefon.getText()
-											.toString()), tfEmail.getText(),
-									tfAdresa.getText());
-				} catch (NumberFormatException e) {
-					JOptionPane.showMessageDialog(null,
-							"Nu ati introdus corect datele", " Eroare",
-							JOptionPane.OK_OPTION);
-					e.printStackTrace();
-				} catch (SQLException e) {
-					JOptionPane.showMessageDialog(null, "Eroare! ", " Eroare",
-							JOptionPane.OK_OPTION);
-				}
-				tfStatus(status);
+							status = Factory
+									.getInstance()
+									.getMecanicDAO()
+									.updateMecanic(
+											mec.getId_mecanic(),
+											tfNume.getText(),
+											tfPrenume.getText(),
+											tfCnm.getText(),
+											Integer.valueOf(tfTelefon.getText()
+													.toString()),
+											tfEmail.getText(),
+											tfAdresa.getText());
+						} catch (NumberFormatException e) {
+							JOptionPane.showMessageDialog(null,
+									"Nu ati introdus corect datele", " Eroare",
+									JOptionPane.OK_OPTION);
+							e.printStackTrace();
+						} catch (SQLException e) {
+							JOptionPane.showMessageDialog(null, "Eroare! ",
+									" Eroare", JOptionPane.OK_OPTION);
+						}
+						tfStatus(status);
+
+					}
+				};
+				(new Thread(r)).start();
 			}
 		});
 
@@ -385,62 +421,104 @@ public class IFrameMecanic extends JFrame {
 							" Eroare", JOptionPane.OK_OPTION);
 					break;
 				case 1:
+					Runnable r = new Runnable() {
 
-					mecanic = (ArrayList<MECANIC>) Factory.getInstance()
-							.getMecanicDAO().searchByNume(tfSearch.getText());
-					model = new TableModelMecanic(mecanic);
-					t.setModel(model);
-					((AbstractTableModel) t.getModel()).fireTableDataChanged();
-					t.repaint();
-					
+						public void run() {
+							mecanic = (ArrayList<MECANIC>) Factory
+									.getInstance().getMecanicDAO()
+									.searchByNume(tfSearch.getText());
+							model = new TableModelMecanic(mecanic);
+							t.setModel(model);
+
+						}
+					};
+
+					(new Thread(r)).start();
 					mecanicFrame.pack();
 
 					break;
 				case 2:
-					mecanic = (ArrayList<MECANIC>) Factory.getInstance()
-							.getMecanicDAO()
-							.searchByPrenume(tfSearch.getText());
-					model = new TableModelMecanic(mecanic);
-					t.setModel(model);
-					((AbstractTableModel) t.getModel()).fireTableDataChanged();
-					t.repaint();
+					r = new Runnable() {
+
+						public void run() {
+							mecanic = (ArrayList<MECANIC>) Factory
+									.getInstance().getMecanicDAO()
+									.searchByPrenume(tfSearch.getText());
+							model = new TableModelMecanic(mecanic);
+							t.setModel(model);
+
+						}
+					};
+					(new Thread(r)).start();
 					mecanicFrame.pack();
+
 					break;
 				case 3:
-					mecanic = (ArrayList<MECANIC>) Factory.getInstance()
-							.getMecanicDAO().searchByCnm(tfSearch.getText());
-					model = new TableModelMecanic(mecanic);
-					t.setModel(model);
-					((AbstractTableModel) t.getModel()).fireTableDataChanged();
-					t.repaint();
+					r = new Runnable() {
+
+						public void run() {
+							mecanic = (ArrayList<MECANIC>) Factory
+									.getInstance().getMecanicDAO()
+									.searchByCnm(tfSearch.getText());
+							model = new TableModelMecanic(mecanic);
+							t.setModel(model);
+						}
+					};
+					(new Thread(r)).start();
 					mecanicFrame.pack();
+
+					break;
 				case 4:
-					mecanic = (ArrayList<MECANIC>) Factory
-							.getInstance()
-							.getMecanicDAO()
-							.searchByTelefon(
-									Integer.valueOf(tfSearch.getText()));
-					model = new TableModelMecanic(mecanic);
-					t.setModel(model);
-					((AbstractTableModel) t.getModel()).fireTableDataChanged();
-					t.repaint();
+					r = new Runnable() {
+
+						public void run() {
+							mecanic = (ArrayList<MECANIC>) Factory
+									.getInstance()
+									.getMecanicDAO()
+									.searchByTelefon(
+											Integer.valueOf(Integer
+													.valueOf(tfSearch.getText())));
+							model = new TableModelMecanic(mecanic);
+							t.setModel(model);
+						}
+					};
+
+					(new Thread(r)).start();
 					mecanicFrame.pack();
+
+					break;
 				case 5:
-					mecanic = (ArrayList<MECANIC>) Factory.getInstance()
-							.getMecanicDAO().searchByEmail(tfSearch.getText());
-					model = new TableModelMecanic(mecanic);
-					t.setModel(model);
-					((AbstractTableModel) t.getModel()).fireTableDataChanged();
-					t.repaint();
+
+					r = new Runnable() {
+
+						public void run() {
+							mecanic = (ArrayList<MECANIC>) Factory
+									.getInstance().getMecanicDAO()
+									.searchByEmail(tfSearch.getText());
+							model = new TableModelMecanic(mecanic);
+							t.setModel(model);
+
+						}
+					};
+					(new Thread(r)).start();
 					mecanicFrame.pack();
+
+					break;
 				case 6:
-					mecanic = (ArrayList<MECANIC>) Factory.getInstance()
-							.getMecanicDAO().searchByAdresa(tfSearch.getText());
-					model = new TableModelMecanic(mecanic);
-					t.setModel(model);
-					((AbstractTableModel) t.getModel()).fireTableDataChanged();
-					t.repaint();
+					r = new Runnable() {
+
+						public void run() {
+							mecanic = (ArrayList<MECANIC>) Factory
+									.getInstance().getMecanicDAO()
+									.searchByAdresa(tfSearch.getText());
+							model = new TableModelMecanic(mecanic);
+							t.setModel(model);
+
+						}
+					};
+					(new Thread(r)).start();
 					mecanicFrame.pack();
+					break;
 				default:
 					break;
 				}
@@ -452,12 +530,19 @@ public class IFrameMecanic extends JFrame {
 		btnRefresh.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
-				mecanic = (ArrayList<MECANIC>) Factory.getInstance()
-						.getMecanicDAO().getAllMecanic();
 
-				model = new TableModelMecanic(mecanic);
-				t.setModel(model);
+				Runnable r = new Runnable() {
 
+					public void run() {
+						mecanic = (ArrayList<MECANIC>) Factory.getInstance()
+								.getMecanicDAO().getAllMecanic();
+
+						model = new TableModelMecanic(mecanic);
+						t.setModel(model);
+
+					}
+				};
+				(new Thread(r)).start();
 				mecanicFrame.pack();
 
 			}
@@ -486,8 +571,10 @@ public class IFrameMecanic extends JFrame {
 						|| tfEmail.getText().equals("")
 						|| tfAdresa.getText().equals("")) {
 					btnSave.setEnabled(false);
+					btnUpdate.setEnabled(false);
 				} else {
 					btnSave.setEnabled(true);
+					btnUpdate.setEnabled(true);
 				}
 			}
 		};
@@ -502,4 +589,5 @@ public class IFrameMecanic extends JFrame {
 		mecanicFrame.pack();
 		return mecanicFrame;
 	}
+
 }

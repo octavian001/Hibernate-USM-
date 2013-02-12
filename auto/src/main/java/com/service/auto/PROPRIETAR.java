@@ -24,8 +24,17 @@ public class PROPRIETAR {
 	@Column(name = "nume", unique = false, nullable = false)
 	private String nume = null;
 	
+	@Column(name = "prenume", unique = false, nullable = false)
+	private String prenume = null;
+	
+	@Column(name = "cnp", unique = true, nullable = true)
+	private String cnp = null;
+	
 	@Column(name = "telefon", unique = false, nullable = false)
 	private Integer telefon = null;
+	
+	@Column(name = "adresa", unique = false, nullable  = false)
+	private String adresa = null;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="id_proprietar")
 	private Set<AUTO> auto;
@@ -34,14 +43,42 @@ public class PROPRIETAR {
 		
 	}
 
-	public PROPRIETAR( String nume, Integer telefon) {
+	public PROPRIETAR( String nume,String prenume,String cnp, Integer telefon, String adresa) {
 		
 		this.nume = nume;
+		this.prenume = prenume;
+		this.cnp = cnp;
 		this.telefon = telefon;
+		this.adresa = adresa;
 	}
     
 	
 	
+	public String getCnp() {
+		return cnp;
+	}
+
+	public void setCnp(String cnp) {
+		this.cnp = cnp;
+	}
+
+	public String getPrenume() {
+		return prenume;
+	}
+	
+	public void setPrenume(String prenume) {
+		this.prenume = prenume;
+	}
+
+	public String getAdresa() {
+		return adresa;
+	}
+
+
+	public void setAdresa(String adresa) {
+		this.adresa = adresa;
+	}
+
 	public Set<AUTO> getAuto() {
 		return auto;
 	}

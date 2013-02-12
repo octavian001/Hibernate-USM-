@@ -12,8 +12,8 @@
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="show_sql">true</property>
 		<!--  <property name="hibernate.default_schema">octavian_service</property> -->
-	  	<property name="hbm2ddl.auto">validate</property>
-
+<!--	  	<property name="hbm2ddl.auto">validate</property>
+-->
 		<!-- <property name="idleConnectionTestPeriod"><value></value></property> -->
 
 		<property name="hibernate.c3p0.min_size">0</property>

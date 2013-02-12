@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -69,8 +71,7 @@ public class PROPRIETARImplDAO {
 		  }
 	
 	 
-	 //aflu ID dupa den_marca
-	 public PROPRIETAR getIdByDenumire(String den){
+	 public PROPRIETAR getIdByNume(String den){
 		    Session session = null;
 		    PROPRIETAR m = null;
 		    try {
@@ -89,7 +90,7 @@ public class PROPRIETARImplDAO {
 		    return m;
 		  }
 	 
-	 public void updateProprietar(Integer id, String m,Integer t) throws SQLException {
+	 public void updateProprietar(Integer id, String m,String p,String c,Integer t, String a) throws SQLException {
 
 			Session session = null;
 			try {
@@ -98,7 +99,10 @@ public class PROPRIETARImplDAO {
 				
 				PROPRIETAR n = (PROPRIETAR) session.get(PROPRIETAR.class, id);
 				n.setNume(m);
+				n.setPrenume(p);
+				n.setCnp(c);
 				n.setTelefon(t);
+				n.setAdresa(a);
 					session.update(n);
 				session.getTransaction().commit();
 			} catch (Exception e) {
@@ -112,5 +116,111 @@ public class PROPRIETARImplDAO {
 				}
 			}
 		}
+	 
+	 public Collection<PROPRIETAR> searchByNume(String nume) {
+			Session session = null;
+			List<PROPRIETAR> m = new ArrayList<PROPRIETAR>();
+
+			try {
+				session = HibernateUtil.getSessionFactory().openSession();
+				session.beginTransaction();
+				Criteria criteria = session.createCriteria(PROPRIETAR.class);
+				m = criteria.add(Restrictions.ilike("nume", "%" + nume + "%"))
+						.list();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Eroare", " Eroare",
+						JOptionPane.OK_OPTION);
+			}finally{
+				if(session.isOpen() && session != null)
+					session.close();
+			}
+
+			return m;
+		}
+     
+	 public Collection<PROPRIETAR> searchByPrenume(String prenume) {
+			Session session = null;
+			List<PROPRIETAR> m = new ArrayList<PROPRIETAR>();
+
+			try {
+				session = HibernateUtil.getSessionFactory().openSession();
+				session.beginTransaction();
+				Criteria criteria = session.createCriteria(PROPRIETAR.class);
+				m = criteria.add(Restrictions.ilike("prenume", "%" + prenume + "%"))
+						.list();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Eroare", " Eroare",
+						JOptionPane.OK_OPTION);
+			}finally{
+				if(session.isOpen() && session != null)
+					session.close();
+			}
+
+			return m;
+		}
+	 
+	 public Collection<PROPRIETAR> searchByTelefon(Integer tel) {
+			Session session = null;
+			List<PROPRIETAR> m = new ArrayList<PROPRIETAR>();
+
+			try {
+				session = HibernateUtil.getSessionFactory().openSession();
+				session.beginTransaction();
+				Criteria criteria = session.createCriteria(PROPRIETAR.class);
+				m = criteria.add(Restrictions.ilike("telefon", "%" + tel + "%"))
+						.list();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Eroare", " Eroare",
+						JOptionPane.OK_OPTION);
+			}finally{
+				if(session.isOpen() && session != null)
+					session.close();
+			}
+
+			return m;
+		}
+	 
+	 public Collection<PROPRIETAR> searchByAdresa(String adresa) {
+			Session session = null;
+			List<PROPRIETAR> m = new ArrayList<PROPRIETAR>();
+
+			try {
+				session = HibernateUtil.getSessionFactory().openSession();
+				session.beginTransaction();
+				Criteria criteria = session.createCriteria(PROPRIETAR.class);
+				m = criteria.add(Restrictions.ilike("adresa", "%" + adresa + "%"))
+						.list();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Eroare", " Eroare",
+						JOptionPane.OK_OPTION);
+			}finally{
+				if(session.isOpen() && session != null)
+					session.close();
+			}
+
+			return m;
+		}
+	 
+	 public Collection<PROPRIETAR> searchByCnp(String cnp) {
+			Session session = null;
+			List<PROPRIETAR> m = new ArrayList<PROPRIETAR>();
+
+			try {
+				session = HibernateUtil.getSessionFactory().openSession();
+				session.beginTransaction();
+				Criteria criteria = session.createCriteria(PROPRIETAR.class);
+				m = criteria.add(Restrictions.ilike("cnp", "%" + cnp + "%"))
+						.list();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Eroare", " Eroare",
+						JOptionPane.OK_OPTION);
+			}finally{
+				if(session.isOpen() && session != null)
+					session.close();
+			}
+
+			return m;
+		}
+	 
 
 }

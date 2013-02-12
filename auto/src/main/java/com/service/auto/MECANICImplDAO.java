@@ -9,6 +9,7 @@ import javax.print.attribute.standard.Media;
 import javax.swing.JOptionPane;
 
 import org.hibernate.Criteria;
+import org.hibernate.PropertyValueException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -24,16 +25,17 @@ public class MECANICImplDAO {
 			session.getTransaction().commit();
 			return true;
 		} catch (Exception e) {
-			
-			JOptionPane.showMessageDialog(null,
-					"Nu ati introdus corect datele sau exista deja asa inregistrari in tabel", " Eroare",
-					JOptionPane.OK_OPTION);
+
+			JOptionPane
+					.showMessageDialog(
+							null,
+							"Nu ati introdus corect datele sau exista deja asa inregistrari in tabel",
+							" Eroare", JOptionPane.OK_OPTION);
 			System.out.println("Eroare la aduagarea datelor in tabela MECANIC");
-			e.printStackTrace();
-		}finally{
-		if (session != null && session.isOpen()) {
-			session.close();
-		  }
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return false;
 	}
@@ -135,11 +137,11 @@ public class MECANICImplDAO {
 			n.setAdresa(a);
 			session.update(n);
 			session.getTransaction().commit();
-			
+
 			return true;
 		} catch (Exception e1) {
 			JOptionPane.showMessageDialog(null,
-					"Nu s-au reinoit datele! Mai incercati odata.", " Eroare",
+					"Nu ati introdus corect datele", " Eroare",
 					JOptionPane.OK_OPTION);
 		} finally {
 			if (session != null && session.isOpen()) {
@@ -163,9 +165,13 @@ public class MECANICImplDAO {
 			Criteria criteria = session.createCriteria(MECANIC.class);
 			m = criteria.add(Restrictions.ilike("nume", "%" + nume + "%"))
 					.list();
+
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Eroare", " Eroare",
 					JOptionPane.OK_OPTION);
+		} finally {
+			if (session.isOpen() && session != null)
+				session.close();
 		}
 
 		return m;
@@ -180,13 +186,18 @@ public class MECANICImplDAO {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 			Criteria criteria = session.createCriteria(MECANIC.class);
-			m = criteria.add(Restrictions.ilike("prenume", "%" + prenume + "%"))
+			m = criteria
+					.add(Restrictions.ilike("prenume", "%" + prenume + "%"))
 					.list();
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Nu ati selectat rindul",
 					" Eroare", JOptionPane.OK_OPTION);
+		} finally {
+			if (session.isOpen() && session != null)
+				session.close();
 		}
+
 		return m;
 	}
 
@@ -201,29 +212,36 @@ public class MECANICImplDAO {
 			Criteria criteria = session.createCriteria(MECANIC.class);
 			m = criteria.add(Restrictions.ilike("cnm", "%" + cnm + "%")).list();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Eroare",
-					" Eroare", JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "Eroare", " Eroare",
+					JOptionPane.OK_OPTION);
+		} finally {
+			if (session.isOpen() && session != null)
+				session.close();
 		}
+
 		return m;
 	}
-	
-	public Collection<MECANIC> searchByTelefon(Integer tel){
+
+	public Collection<MECANIC> searchByTelefon(int tel) {
 		Session session = null;
 		List<MECANIC> m = new ArrayList<MECANIC>();
-		
-		try{
+
+		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
-			Criteria criteria = session.createCriteria(MECANIC.class);
-			m = criteria.add(Restrictions.ilike("telefon", "%" + tel + "%")).list();
-		}catch(Exception e){
-			JOptionPane.showMessageDialog(null,
-					"Eroare", " Eroare",
+			m = session.createQuery("from MECANIC where telefon like :tel")
+					.setString("tel", "%" + tel + "%").list();
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Eroare", " Eroare",
 					JOptionPane.OK_OPTION);
+		} finally {
+			if (session.isOpen() && session != null)
+				session.close();
 		}
 		return m;
 	}
-	
+
 	public Collection<MECANIC> searchByEmail(String email) {
 		Session session = null;
 		List<MECANIC> m = new ArrayList<MECANIC>();
@@ -232,14 +250,18 @@ public class MECANICImplDAO {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 			Criteria criteria = session.createCriteria(MECANIC.class);
-			m = criteria.add(Restrictions.ilike("email", "%" + email + "%")).list();
+			m = criteria.add(Restrictions.ilike("email", "%" + email + "%"))
+					.list();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Eroare",
-					" Eroare", JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "Eroare", " Eroare",
+					JOptionPane.OK_OPTION);
+		} finally {
+			if (session.isOpen() && session != null)
+				session.close();
 		}
 		return m;
 	}
-	
+
 	public Collection<MECANIC> searchByAdresa(String adr) {
 		Session session = null;
 		List<MECANIC> m = new ArrayList<MECANIC>();
@@ -248,11 +270,16 @@ public class MECANICImplDAO {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 			Criteria criteria = session.createCriteria(MECANIC.class);
-			m = criteria.add(Restrictions.ilike("adresa", "%" + adr + "%")).list();
+			m = criteria.add(Restrictions.ilike("adresa", "%" + adr + "%"))
+					.list();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Eroare",
-					" Eroare", JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "Eroare", " Eroare",
+					JOptionPane.OK_OPTION);
+		} finally {
+			if (session.isOpen() && session != null)
+				session.close();
 		}
+
 		return m;
 	}
 
