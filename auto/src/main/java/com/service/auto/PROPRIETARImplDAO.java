@@ -13,7 +13,7 @@ import org.hibernate.criterion.Restrictions;
 
 public class PROPRIETARImplDAO {
 	
-	public  void addProprietar(PROPRIETAR m) {
+	public  boolean addProprietar(PROPRIETAR m) {
 		Session session = null;
 
 		try {
@@ -21,12 +21,14 @@ public class PROPRIETARImplDAO {
 			session.beginTransaction();
 			session.save(m);
 			session.getTransaction().commit();
+			return true;
 		} catch (Exception e) {
 			System.out.println("Eroare la aduagarea datelor in tabela PROPRIETAR");
 		}
 		if (session != null && session.isOpen()) {
 			session.close();
 		}
+		return false;
 	}
 	
 	//afisarea tuturor inregistrarilor din tabel
@@ -50,7 +52,7 @@ public class PROPRIETARImplDAO {
 		return m;
 	}
 	
-	 public void deleteProprietar(Integer id){
+	 public boolean deleteProprietar(Integer id){
 		    Session session = null;
 		    try {
 		      session = HibernateUtil.getSessionFactory().openSession();
@@ -58,6 +60,7 @@ public class PROPRIETARImplDAO {
 		      PROPRIETAR m = (PROPRIETAR) session.get(PROPRIETAR.class, id);
 		      session.delete(m);
 		      session.getTransaction().commit();
+		      return true;
 		    }catch(IllegalArgumentException e1){
 		    	System.out.println("Nu exista asa inregistrare  in tabela PROPRIETAR  ! ");
 		    }
@@ -67,6 +70,7 @@ public class PROPRIETARImplDAO {
 		      if (session != null && session.isOpen()) {
 		        session.close();
 		      }
+		      return false;
 		    }
 		  }
 	
@@ -90,7 +94,7 @@ public class PROPRIETARImplDAO {
 		    return m;
 		  }
 	 
-	 public void updateProprietar(Integer id, String m,String p,String c,Integer t, String a) throws SQLException {
+	 public boolean updateProprietar(Integer id, String m,String p,String c,Integer t, String a) throws SQLException {
 
 			Session session = null;
 			try {
@@ -105,6 +109,7 @@ public class PROPRIETARImplDAO {
 				n.setAdresa(a);
 					session.update(n);
 				session.getTransaction().commit();
+		return true;
 			} catch (Exception e) {
 				System.out.println("Eroare la schimbarea datelor in tabela PROPRIETAR" );
 				
@@ -114,6 +119,7 @@ public class PROPRIETARImplDAO {
 
 					session.close();
 				}
+			return false;
 			}
 		}
 	 
@@ -222,5 +228,25 @@ public class PROPRIETARImplDAO {
 			return m;
 		}
 	 
+	 public Collection<PROPRIETAR> searchByTelefon(int tel) {
+			Session session = null;
+			List<PROPRIETAR> m = new ArrayList<PROPRIETAR>();
 
+			try {
+				session = HibernateUtil.getSessionFactory().openSession();
+				session.beginTransaction();
+				m = session.createQuery("from PROPRIETAR where telefon like :tel")
+						.setString("tel", "%" + tel + "%").list();
+
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Eroare", " Eroare",
+						JOptionPane.OK_OPTION);
+			} finally {
+				if (session.isOpen() && session != null)
+					session.close();
+			}
+			return m;
+		}
+	 
+	
 }

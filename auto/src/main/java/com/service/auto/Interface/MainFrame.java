@@ -115,6 +115,22 @@ public class MainFrame extends JFrame {
 			}
 
 		});
+		
+		proprietarTable.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				Runnable r = new Runnable() {
+
+					public void run() {
+						// cream fereastra interioara
+						desktopPane.add(IFrameProprietar.getProprietarFrame());
+					}
+				};
+				(new Thread(r)).start();
+			
+				
+			}
+		});
 
 		autoTable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

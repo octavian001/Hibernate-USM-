@@ -30,7 +30,7 @@ public class TableModelProprietar extends AbstractTableModel {
 	}
 
 	public int getColumnCount() {
-		return 7;
+		return 6;
 	}
 
 	public String getColumnName(int columnIndex) {
