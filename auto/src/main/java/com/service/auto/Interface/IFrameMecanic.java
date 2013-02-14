@@ -72,6 +72,7 @@ public class IFrameMecanic extends JFrame {
 	private static JTextField tfSearch = null;
 	private static JPanel panel_search = null;
 	private static JPanel panel = null;
+	
 
 	// anuleaza textul din TextField daca s-au salvat datele in tabel
 	public static boolean tfStatus(Boolean status) {
@@ -291,7 +292,7 @@ public class IFrameMecanic extends JFrame {
 							mec.setEmail(tfEmail.getText());
 							mec.setAdresa(tfAdresa.getText());
 						} catch (NumberFormatException e) {
-						   }
+						}
 						try {
 							boolean status = Factory.getInstance()
 									.getMecanicDAO().addMecanic(mec);
@@ -429,6 +430,9 @@ public class IFrameMecanic extends JFrame {
 									.searchByNume(tfSearch.getText());
 							model = new TableModelMecanic(mecanic);
 							t.setModel(model);
+							((AbstractTableModel) t.getModel())
+									.fireTableDataChanged();
+							t.repaint();
 
 						}
 					};
@@ -446,6 +450,9 @@ public class IFrameMecanic extends JFrame {
 									.searchByPrenume(tfSearch.getText());
 							model = new TableModelMecanic(mecanic);
 							t.setModel(model);
+							((AbstractTableModel) t.getModel())
+									.fireTableDataChanged();
+							t.repaint();
 
 						}
 					};
@@ -462,6 +469,9 @@ public class IFrameMecanic extends JFrame {
 									.searchByCnm(tfSearch.getText());
 							model = new TableModelMecanic(mecanic);
 							t.setModel(model);
+							((AbstractTableModel) t.getModel())
+									.fireTableDataChanged();
+							t.repaint();
 						}
 					};
 					(new Thread(r)).start();
@@ -480,6 +490,9 @@ public class IFrameMecanic extends JFrame {
 													.valueOf(tfSearch.getText())));
 							model = new TableModelMecanic(mecanic);
 							t.setModel(model);
+							((AbstractTableModel) t.getModel())
+									.fireTableDataChanged();
+							t.repaint();
 						}
 					};
 
@@ -497,7 +510,9 @@ public class IFrameMecanic extends JFrame {
 									.searchByEmail(tfSearch.getText());
 							model = new TableModelMecanic(mecanic);
 							t.setModel(model);
-
+							((AbstractTableModel) t.getModel())
+									.fireTableDataChanged();
+							t.repaint();
 						}
 					};
 					(new Thread(r)).start();
@@ -513,6 +528,9 @@ public class IFrameMecanic extends JFrame {
 									.searchByAdresa(tfSearch.getText());
 							model = new TableModelMecanic(mecanic);
 							t.setModel(model);
+							((AbstractTableModel) t.getModel())
+									.fireTableDataChanged();
+							t.repaint();
 
 						}
 					};

@@ -165,26 +165,7 @@ public class PROPRIETARImplDAO {
 			return m;
 		}
 	 
-	 public Collection<PROPRIETAR> searchByTelefon(Integer tel) {
-			Session session = null;
-			List<PROPRIETAR> m = new ArrayList<PROPRIETAR>();
-
-			try {
-				session = HibernateUtil.getSessionFactory().openSession();
-				session.beginTransaction();
-				Criteria criteria = session.createCriteria(PROPRIETAR.class);
-				m = criteria.add(Restrictions.ilike("telefon", "%" + tel + "%"))
-						.list();
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "Eroare", " Eroare",
-						JOptionPane.OK_OPTION);
-			}finally{
-				if(session.isOpen() && session != null)
-					session.close();
-			}
-
-			return m;
-		}
+	
 	 
 	 public Collection<PROPRIETAR> searchByAdresa(String adresa) {
 			Session session = null;

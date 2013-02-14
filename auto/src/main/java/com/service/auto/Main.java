@@ -18,6 +18,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.mapping.Collection;
 
+import com.service.auto.Interface.LoginFrame;
 import com.service.auto.Interface.MainFrame;
 
 
@@ -27,7 +28,7 @@ import com.service.auto.Interface.MainFrame;
 			public static void main(String a[]) {
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
-						new MainFrame();
+						new LoginFrame();
 					}
 				});
 				/*

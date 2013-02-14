@@ -98,8 +98,8 @@ public class IFrameProprietar extends JFrame {
 
 		if (proprietarFrame == null || proprietarFrame.isClosed()) {
 
-			proprietarFrame = new JInternalFrame("PROPRIETAR", false, true, false,
-					true);
+			proprietarFrame = new JInternalFrame("PROPRIETAR", false, true,
+					false, true);
 
 			proprietarFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			proprietarFrame.setSize(900, 600);
@@ -271,14 +271,14 @@ public class IFrameProprietar extends JFrame {
 						PROPRIETAR prop = new PROPRIETAR();
 						try {
 							prop.setId_proprietar(null);
-						    prop.setNume(tfNume.getText());
+							prop.setNume(tfNume.getText());
 							prop.setPrenume(tfPrenume.getText());
 							prop.setCnp(tfCnp.getText());
 							prop.setTelefon(Integer.valueOf(tfTelefon.getText()
 									.toString()));
 							prop.setAdresa(tfAdresa.getText());
 						} catch (NumberFormatException e) {
-						   }
+						}
 						try {
 							boolean status = Factory.getInstance()
 									.getProprietarDAO().addProprietar(prop);
@@ -313,7 +313,8 @@ public class IFrameProprietar extends JFrame {
 											proprietar.get(t.getSelectedRow())
 													.getId_proprietar())) {
 								// sterge rindul din JTable
-								proprietar.remove(proprietar.get(t.getSelectedRow()));
+								proprietar.remove(proprietar.get(t
+										.getSelectedRow()));
 								((AbstractTableModel) t.getModel())
 										.fireTableDataChanged();
 								t.repaint();
@@ -414,6 +415,9 @@ public class IFrameProprietar extends JFrame {
 									.searchByNume(tfSearch.getText());
 							model = new TableModelProprietar(proprietar);
 							t.setModel(model);
+							((AbstractTableModel) t.getModel())
+									.fireTableDataChanged();
+							t.repaint();
 
 						}
 					};
@@ -431,6 +435,9 @@ public class IFrameProprietar extends JFrame {
 									.searchByPrenume(tfSearch.getText());
 							model = new TableModelProprietar(proprietar);
 							t.setModel(model);
+							((AbstractTableModel) t.getModel())
+									.fireTableDataChanged();
+							t.repaint();
 
 						}
 					};
@@ -447,6 +454,10 @@ public class IFrameProprietar extends JFrame {
 									.searchByCnp(tfSearch.getText());
 							model = new TableModelProprietar(proprietar);
 							t.setModel(model);
+							((AbstractTableModel) t.getModel())
+									.fireTableDataChanged();
+							t.repaint();
+
 						}
 					};
 					(new Thread(r)).start();
@@ -465,11 +476,15 @@ public class IFrameProprietar extends JFrame {
 													.valueOf(tfSearch.getText())));
 							model = new TableModelProprietar(proprietar);
 							t.setModel(model);
+							((AbstractTableModel) t.getModel())
+									.fireTableDataChanged();
+							t.repaint();
+
 						}
 					};
 
 					(new Thread(r)).start();
-						proprietarFrame.pack();
+					proprietarFrame.pack();
 
 					break;
 				case 5:
@@ -482,6 +497,9 @@ public class IFrameProprietar extends JFrame {
 									.searchByAdresa(tfSearch.getText());
 							model = new TableModelProprietar(proprietar);
 							t.setModel(model);
+							((AbstractTableModel) t.getModel())
+									.fireTableDataChanged();
+							t.repaint();
 
 						}
 					};
@@ -489,7 +507,7 @@ public class IFrameProprietar extends JFrame {
 					proprietarFrame.pack();
 
 					break;
-								default:
+				default:
 					break;
 				}
 
@@ -504,8 +522,9 @@ public class IFrameProprietar extends JFrame {
 				Runnable r = new Runnable() {
 
 					public void run() {
-						proprietar = (ArrayList<PROPRIETAR>) Factory.getInstance()
-								.getProprietarDAO().getAllProprietar();
+						proprietar = (ArrayList<PROPRIETAR>) Factory
+								.getInstance().getProprietarDAO()
+								.getAllProprietar();
 
 						model = new TableModelProprietar(proprietar);
 						t.setModel(model);
@@ -538,7 +557,7 @@ public class IFrameProprietar extends JFrame {
 						|| tfPrenume.getText().equals("")
 						|| tfCnp.getText().equals("")
 						|| tfTelefon.getText().equals("")
-						||  tfAdresa.getText().equals("")) {
+						|| tfAdresa.getText().equals("")) {
 					btnSave.setEnabled(false);
 					btnUpdate.setEnabled(false);
 				} else {
