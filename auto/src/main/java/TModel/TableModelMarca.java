@@ -10,19 +10,18 @@ import javax.swing.table.TableModel;
 
 import com.service.auto.*;
 
-public class TableModelPiese extends AbstractTableModel {
-	
+public class TableModelMarca extends AbstractTableModel {
+
 	private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
-    private List<PIESE> piese;
-    
-    public TableModelPiese(List<PIESE> piese){
-    	this.piese = piese;
-    }
-    
-    
+	private List<MARCA> marca;
+
+	public TableModelMarca(List<MARCA> marca) {
+		this.marca = marca;
+	}
+
 	public void addTableModelListener(TableModelListener listener) {
-	  listeners.add(listener);	
-		
+		listeners.add(listener);
+
 	}
 
 	public Class<?> getColumnClass(int columnIndex) {
@@ -30,50 +29,42 @@ public class TableModelPiese extends AbstractTableModel {
 	}
 
 	public int getColumnCount() {
-		return 4;
+		return 2;
 	}
 
 	public String getColumnName(int columnIndex) {
-      switch (columnIndex) {
-	case 0:
-		return "ID";
-	case 1:
-		return "Denumire";
-	case 2:
-		return "Pret";
-	case 3:
-		return "Cantitate";
-	}
+		switch (columnIndex) {
+		case 0:
+			return "ID";
+		case 1:
+			return "Denumire marca";
+		}
 		return "";
 	}
 
 	public int getRowCount() {
-		return piese.size();
+		return marca.size();
 	}
+
 	public Object getValueAt(int rowIndex, int columnIndex) {
-	   PIESE p = piese.get(rowIndex);
-	   switch (columnIndex) {
-	case 0:
-		return p.getId_piesa();
-	case 1:
-		return p.getDenumire();
-	case 2:
-		return p.getPret();
-	case 3:
-		return p.getCantitate();
-		
-	   }
+		MARCA m = marca.get(rowIndex);
+		switch (columnIndex) {
+		case 0:
+			return m.getId_marca();
+		case 1:
+			return m.getDen_marca();
+				}
 		return "";
 	}
 
-	//reeditarea coloanelor
+	// reeditarea coloanelor
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return false;
 	}
 
 	public void removeTableModelListener(TableModelListener listener) {
 		listeners.remove(listener);
-		
+
 	}
 
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {

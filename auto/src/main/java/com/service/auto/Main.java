@@ -1,7 +1,5 @@
 package com.service.auto;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -28,7 +26,7 @@ import com.service.auto.Interface.MainFrame;
 			public static void main(String a[]) {
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
-						new LoginFrame();
+						new MainFrame();
 					}
 				});
 				/*

@@ -129,6 +129,22 @@ public class MainFrame extends JFrame {
 				(new Thread(r)).start();
 			
 				
+		
+			}
+		});
+		
+		pieseTable.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				Runnable r =  new Runnable() {
+					
+					public void run() {
+						desktopPane.add(IFramePiese.getPieseFrame());
+						
+					}
+				};
+				(new Thread(r)).start();
+				
 			}
 		});
 
@@ -137,6 +153,7 @@ public class MainFrame extends JFrame {
 				desktopPane.add(IFrameAuto.getAutoFrame());
 			}
 		});
+		
 
 		setVisible(true);
 	}
