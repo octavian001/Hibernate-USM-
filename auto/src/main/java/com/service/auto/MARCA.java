@@ -25,9 +25,9 @@ public class MARCA {
 	@Column(name = "den_marca", nullable = false, unique = true)
 	private String den_marca = null;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="marca")
+/*	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="marca")
 	private Set <MODEL> model;
-
+*/
 	 
 	
 	public MARCA() {
@@ -56,7 +56,7 @@ public class MARCA {
 	public void setDen_marca(String den_marca) {
 		this.den_marca = den_marca;
 	}
-
+/*
 	public Set<MODEL> getModel() {
 		return model;
 	}
@@ -64,6 +64,6 @@ public class MARCA {
 	public void setModel(Set<MODEL> model) {
 		this.model = model;
 	}
-
+*/
 	
 }

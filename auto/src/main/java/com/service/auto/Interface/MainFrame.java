@@ -89,7 +89,7 @@ public class MainFrame extends JFrame {
 
 		operatieTable = new JMenuItem("OPERATIE");
 		modelTable.setFont(fontOptionMenu);
-		tableMenu.add(modelTable);
+		tableMenu.add(operatieTable);
 
 		pieseTable = new JMenuItem("PIESE");
 		pieseTable.setFont(fontOptionMenu);
@@ -98,6 +98,7 @@ public class MainFrame extends JFrame {
 		proprietarTable = new JMenuItem("PROPRIETAR");
 		proprietarTable.setFont(fontOptionMenu);
 		tableMenu.add(proprietarTable);
+		
 
 		menuBar.add(tableMenu);
 		setJMenuBar(menuBar);
@@ -129,6 +130,48 @@ public class MainFrame extends JFrame {
 				(new Thread(r)).start();
 			
 				
+		
+			}
+		});
+		
+		pieseTable.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				Runnable r =  new Runnable() {
+					
+					public void run() {
+						desktopPane.add(IFramePiese.getPieseFrame());
+						
+					}
+				};
+				(new Thread(r)).start();
+				
+			}
+		});
+		
+		marcaTable.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				Runnable r = new Runnable() {
+					
+					public void run() {
+					      desktopPane.add(IFrameMarca.getMarcaFrame());
+						
+					}
+				};
+				(new Thread(r)).start();
+			}
+		});
+		
+		operatieTable.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				Runnable r = new Runnable(){
+					public void run(){
+						desktopPane.add(IFrameOperatie.getOperatieFrame());
+					}
+				};
+				(new Thread(r)).start();
 			}
 		});
 
@@ -137,6 +180,7 @@ public class MainFrame extends JFrame {
 				desktopPane.add(IFrameAuto.getAutoFrame());
 			}
 		});
+		
 
 		setVisible(true);
 	}

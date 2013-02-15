@@ -10,13 +10,13 @@ import javax.swing.table.TableModel;
 
 import com.service.auto.*;
 
-public class TableModelPiese extends AbstractTableModel {
+public class TableModelOperatie extends AbstractTableModel {
 	
 	private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
-    private List<PIESE> piese;
+    private List<OPERATIE> oper;
     
-    public TableModelPiese(List<PIESE> piese){
-    	this.piese = piese;
+    public TableModelOperatie(List<OPERATIE> oper){
+    	this.oper = oper;
     }
     
     
@@ -30,7 +30,7 @@ public class TableModelPiese extends AbstractTableModel {
 	}
 
 	public int getColumnCount() {
-		return 4;
+		return 3;
 	}
 
 	public String getColumnName(int columnIndex) {
@@ -41,27 +41,22 @@ public class TableModelPiese extends AbstractTableModel {
 		return "Denumire";
 	case 2:
 		return "Pret";
-	case 3:
-		return "Cantitate";
 	}
 		return "";
 	}
 
 	public int getRowCount() {
-		return piese.size();
+		return oper.size();
 	}
 	public Object getValueAt(int rowIndex, int columnIndex) {
-	   PIESE p = piese.get(rowIndex);
+	   OPERATIE o = oper.get(rowIndex);
 	   switch (columnIndex) {
 	case 0:
-		return p.getId_piesa();
+		return o.getId_oper();
 	case 1:
-		return p.getDenumire();
+		return o.getDen_oper();
 	case 2:
-		return p.getPret();
-	case 3:
-		return p.getCantitate();
-		
+		return o.getPret_oper();	
 	   }
 		return "";
 	}
