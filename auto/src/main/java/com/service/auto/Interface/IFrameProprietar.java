@@ -142,7 +142,7 @@ public class IFrameProprietar extends JFrame {
 			panel_lb = new JPanel();
 			panel_lb.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 			panel_lb.setLayout(new BoxLayout(panel_lb, BoxLayout.Y_AXIS));
-			panel_lb.setBackground(Color.black);
+			//panel_lb.setBackground(Color.black);
 			// add labels
 			lbNume = new JLabel("Nume");
 			lbNume.setPreferredSize(new Dimension(100, 20));
@@ -168,31 +168,31 @@ public class IFrameProprietar extends JFrame {
 			tfAdresa.setPreferredSize(new Dimension(200, 20));
 
 			line = new JPanel(new FlowLayout());
-			line.setBackground(Color.black);
+			//line.setBackground(Color.black);
 			line.add(lbNume);
 			line.add(tfNume);
 			panel_lb.add(line);
 
 			line = new JPanel(new FlowLayout());
-			line.setBackground(Color.green);
+			//line.setBackground(Color.green);
 			line.add(lbPrenume);
 			line.add(tfPrenume);
 			panel_lb.add(line);
 
 			line = new JPanel(new FlowLayout());
-			line.setBackground(Color.blue);
+			//line.setBackground(Color.blue);
 			line.add(lbCnp);
 			line.add(tfCnp);
 			panel_lb.add(line);
 
 			line = new JPanel(new FlowLayout());
-			line.setBackground(Color.cyan);
+			//line.setBackground(Color.cyan);
 			line.add(lbTelefon);
 			line.add(tfTelefon);
 			panel_lb.add(line);
 
 			line = new JPanel(new FlowLayout());
-			line.setBackground(Color.GRAY);
+			//line.setBackground(Color.GRAY);
 			line.add(lbAdresa);
 			line.add(tfAdresa);
 			panel_lb.add(line);
@@ -204,7 +204,7 @@ public class IFrameProprietar extends JFrame {
 			panel_table.setVisible(true);
 			panel_table.setSize(new Dimension(300, 300));
 			panel_table.setLocation(0, 0);
-			panel_table.setBackground(Color.white);
+			//panel_table.setBackground(Color.white);
 			panel_table.setPreferredSize(new Dimension(300, 300));
 			scrollPane = new JScrollPane(t);
 

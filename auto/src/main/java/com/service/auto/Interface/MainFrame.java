@@ -181,6 +181,19 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
+		modelTable.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+			 Runnable r = new Runnable() {
+				
+				public void run() {
+					desktopPane.add(IFrameModel.getModelFrame());
+								
+				}
+			};
+				(new Thread(r)).start();
+			}
+		});
 
 		setVisible(true);
 	}

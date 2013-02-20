@@ -134,7 +134,7 @@ public class IFrameOperatie extends JFrame {
 			panel_lb = new JPanel();
 			panel_lb.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 			panel_lb.setLayout(new BoxLayout(panel_lb, BoxLayout.Y_AXIS));
-			panel_lb.setBackground(Color.black);
+			//panel_lb.setBackground(Color.black);
 			// add labels
 			lbDenumire = new JLabel("Denumire");
 			lbDenumire.setPreferredSize(new Dimension(100, 20));
@@ -148,19 +148,19 @@ public class IFrameOperatie extends JFrame {
 			tfPret.setPreferredSize(new Dimension(200, 20));
 
 			line = new JPanel(new FlowLayout());
-			line.setBackground(Color.black);
+			//line.setBackground(Color.black);
 			line.add(lbDenumire);
 			line.add(tfDenumire);
 			panel_lb.add(line);
 
 			line = new JPanel(new FlowLayout());
-			line.setBackground(Color.green);
+			//line.setBackground(Color.green);
 			line.add(lbPret);
 			line.add(tfPret);
 			panel_lb.add(line);
 
 			line = new JPanel(new FlowLayout());
-			line.setBackground(Color.blue);
+			//line.setBackground(Color.blue);
 			panel_lb.add(line);
 
 			panel_lb.setVisible(false);
@@ -234,7 +234,7 @@ public class IFrameOperatie extends JFrame {
 				Runnable r = new Runnable() {
 
 					public void run() {
-						OPERATIE p = new OPERATIE();
+						OPERATIE o = new OPERATIE();
 						try {
 							o.setId_oper(null);
 							o.setDen_oper(tfDenumire.getText());

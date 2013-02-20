@@ -10,7 +10,7 @@ import org.hibernate.Session;
 public class AUTOImplDAO {
 	
 	//adaugarea unei noi inregistrari 
-	public  void addAuto(AUTO m) {
+	public  boolean addAuto(AUTO m) {
 		Session session = null;
 
 		try {
@@ -18,12 +18,14 @@ public class AUTOImplDAO {
 			session.beginTransaction();
 			session.save(m);
 			session.getTransaction().commit();
+			return true;
 		} catch (Exception e) {
 			System.out.println("Eroare la aduagarea datelor in tabela Auto");
 		}
 		if (session != null && session.isOpen()) {
 			session.close();
 		}
+		return false;
 	}
 	
 	//afisarea tuturor inregistrarilor din tabel
@@ -47,7 +49,7 @@ public class AUTOImplDAO {
 		return m;
 	}
 	
-	 public void deleteAuto(Integer id){
+	 public boolean deleteAuto(Integer id){
 		    Session session = null;
 		    try {
 		      session = HibernateUtil.getSessionFactory().openSession();
@@ -55,6 +57,7 @@ public class AUTOImplDAO {
 		      AUTO m = (AUTO) session.get(AUTO.class, id);
 		      session.delete(m);
 		      session.getTransaction().commit();
+		      return true;
 		    }catch(IllegalArgumentException e1){
 		    	System.out.println("Nu exista asa inregistrare  in tabela AUTO  ! ");
 		    }
@@ -65,23 +68,28 @@ public class AUTOImplDAO {
 		        session.close();
 		      }
 		    }
+		    return false;
 		  }
 	
 	
-	 public void updateModel(Integer id, String m, MARCA idm) throws SQLException {
+	 public boolean updateModel(Integer id, int an, int nr,int serie, MARCA idm,PROPRIETAR idp) throws SQLException {
 
 			Session session = null;
 			try {
 				session = HibernateUtil.getSessionFactory().openSession();
 				session.beginTransaction();
 				//if(session.get(MARCA.class, id) != null)
-				MODEL n = (MODEL) session.get(MODEL.class, id);
-				n.setDen_model(m);
-				n.setMarca(idm);
+				AUTO n = (AUTO) session.get(AUTO.class, id);
+				n.setAn_fabr(an);
+				n.setNr_inmatr(nr);
+				n.setSerie_motor(serie);
+				n.setId_marca(idm);
+				n.setId_proprietar(idp);
 					session.update(n);
 				session.getTransaction().commit();
+				return true;
 			} catch (Exception e) {
-				System.out.println("Eroare la schimbarea datelor in tabela MODEL" );
+				System.out.println("Eroare la schimbarea datelor in tabela AUTO" );
 				
 				
 			} finally {
@@ -90,6 +98,7 @@ public class AUTOImplDAO {
 					session.close();
 				}
 			}
+			return false;
 		}
 
 

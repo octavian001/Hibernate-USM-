@@ -31,7 +31,7 @@ public class AUTO {
 	   @Column(name = "an_fabr", unique = false, nullable = false)
        private Integer an_fabr = null;
 	   
-	   @ManyToOne
+	   @ManyToOne(/*cascade = CascadeType.ALL*/)
 	   @JoinColumn(name="id_marca"/*,referencedColumnName="id_marca"*/)
        private MARCA id_marca = null;
 	   

@@ -28,7 +28,7 @@ public class TableModelAuto implements TableModel {
 	}
 
 	public int getColumnCount() {
-		return 6;
+		return 7;
 	}
 
 	public String getColumnName(int columnIndex) {
@@ -42,9 +42,11 @@ public class TableModelAuto implements TableModel {
 		case 3:
 			return "Serie motor";
 		case 4:
-			return "ID marca";
+			return "Marca";
 		case 5:
-			return "ID proprietar";
+			return "Nume";
+		case 6:
+			return "Prenume";
 		}
 		return "";
 	}
@@ -57,17 +59,19 @@ public class TableModelAuto implements TableModel {
 		AUTO a = auto.get(rowIndex);
 		switch(columnIndex){
 		case 0:
-			return a.getId_marca();
+			return auto.get(rowIndex).getId_auto();
 		case 1:
-			return a.getAn_fabr();
+			return auto.get(rowIndex).getAn_fabr();
 		case 2:
-			return a.getNr_inmatr();
+			return auto.get(rowIndex).getNr_inmatr();
 		case 3:
-			return a.getSerie_motor();
+			return auto.get(rowIndex).getSerie_motor();
 		case 4:
-			return a.getId_marca();
+			return  auto.get(rowIndex).getId_marca().getDen_marca();
 		case 5:
-			return a.getId_proprietar();
+			return  auto.get(rowIndex).getId_proprietar().getNume();
+		case 6:
+			return auto.get(rowIndex).getId_proprietar().getPrenume();
 		}
 		return "";
 	}

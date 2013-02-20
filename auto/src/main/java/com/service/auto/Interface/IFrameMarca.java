@@ -131,7 +131,7 @@ public class IFrameMarca extends JFrame {
 			panel_lb = new JPanel();
 			panel_lb.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 			panel_lb.setLayout(new BoxLayout(panel_lb, BoxLayout.Y_AXIS));
-			panel_lb.setBackground(Color.black);
+			//panel_lb.setBackground(Color.black);
 			// add labels
 			lbDen_marca = new JLabel("Denumire");
 			lbDen_marca.setPreferredSize(new Dimension(100, 20));
@@ -141,7 +141,7 @@ public class IFrameMarca extends JFrame {
 			tfDen_marca.setPreferredSize(new Dimension(200, 20));
 			
 			line = new JPanel(new FlowLayout());
-			line.setBackground(Color.black);
+			//line.setBackground(Color.black);
 			line.add(lbDen_marca);
 			line.add(tfDen_marca);
 			panel_lb.add(line);
@@ -154,7 +154,7 @@ public class IFrameMarca extends JFrame {
 			panel_table.setVisible(true);
 			panel_table.setSize(new Dimension(300, 300));
 			panel_table.setLocation(0, 0);
-			panel_table.setBackground(Color.white);
+			//panel_table.setBackground(Color.white);
 			panel_table.setPreferredSize(new Dimension(300, 300));
 			scrollPane = new JScrollPane(t);
 
@@ -279,6 +279,13 @@ public class IFrameMarca extends JFrame {
 		btnEdit.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
+			   Runnable r = new Runnable() {
+				
+				public void run() {
+					
+					
+				}
+			};
 				try {
 					m = marca.get(t.getSelectedRow());
 					tfDen_marca.setText(m.getDen_marca());

@@ -25,7 +25,7 @@ public class MODEL {
 	@Column(name = "den_model", unique = true, nullable = false)
 	private String den_model = null;
 	
-	 @ManyToOne(cascade = CascadeType.ALL)
+	 @ManyToOne(/*cascade = CascadeType.ALL*/)
 	 @JoinColumn(name="id_marca")
 	private MARCA marca;
 	

@@ -24,9 +24,9 @@ public class MARCA {
 
 	@Column(name = "den_marca", nullable = false, unique = true)
 	private String den_marca = null;
-	
-/*	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="marca")
-	private Set <MODEL> model;
+	/*
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy="marca")
+	private Set <MODEL> model = new HashSet<MODEL>();
 */
 	 
 	
