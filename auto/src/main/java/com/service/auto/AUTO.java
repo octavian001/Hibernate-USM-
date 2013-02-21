@@ -23,10 +23,10 @@ public class AUTO {
        private Integer id_auto = null;
 	   
 	   @Column(name = "nr_inmatr", unique = true, nullable = false)
-	   private Integer nr_inmatr = null;
+	   private String nr_inmatr = null;
 	   
 	   @Column(name =  "serie_motor",unique = true ,nullable = false)
-       private Integer serie_motor = null;
+       private String serie_motor = null;
 	   
 	   @Column(name = "an_fabr", unique = false, nullable = false)
        private Integer an_fabr = null;
@@ -44,7 +44,7 @@ public class AUTO {
        }
        
 
-	   public AUTO( Integer nr_inmatr, Integer serie_motor,
+	   public AUTO( String nr_inmatr, String serie_motor,
 			Integer an_fabr,MARCA id_marca, PROPRIETAR id_proprietar) {
 	
 		this.nr_inmatr = nr_inmatr;
@@ -58,11 +58,11 @@ public class AUTO {
 		return id_auto;
 	}
 
-	public Integer getNr_inmatr() {
+	public String getNr_inmatr() {
 		return nr_inmatr;
 	}
 
-	public Integer getSerie_motor() {
+	public String getSerie_motor() {
 		return serie_motor;
 	}
  
@@ -87,11 +87,11 @@ public class AUTO {
 		this.id_auto = id_auto;
 	}
 
-	public void setNr_inmatr(Integer nr_inmatr) {
+	public void setNr_inmatr(String nr_inmatr) {
 		this.nr_inmatr = nr_inmatr;
 	}
 
-	public void setSerie_motor(Integer serie_motor) {
+	public void setSerie_motor(String serie_motor) {
 		this.serie_motor = serie_motor;
 	}
 
