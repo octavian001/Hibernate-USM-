@@ -55,7 +55,7 @@ public class IFrameAuto extends JFrame {
 	private static JLabel lbSerie = null;
 	private static JLabel lbMarca = null;
 	private static JLabel lbProprietar = null;
-	
+
 	private static JButton btnAdd = null;
 	private static JButton btnEdit = null;
 	private static JButton btnDelete = null;
@@ -66,9 +66,9 @@ public class IFrameAuto extends JFrame {
 	private static JTextField tfAn = null;
 	private static JTextField tfNr = null;
 	private static JTextField tfSerie = null;
-	private static JComboBox  cbMarca = null;
-	private static JComboBox  cbProprietar = null;
-	
+	private static JComboBox cbMarca = null;
+	private static JComboBox cbProprietar = null;
+
 	private static AUTO a;
 	private static ArrayList<AUTO> auto = null;
 	private static JComboBox cbSearch = null;
@@ -76,13 +76,12 @@ public class IFrameAuto extends JFrame {
 	private static JTextField tfSearch = null;
 	private static JPanel panel_search = null;
 	private static JPanel panel = null;
-	
+
 	private static ArrayList<MARCA> marca = null;
 	private static MARCA m1 = null;
-	
+
 	private static ArrayList<PROPRIETAR> proprietar = null;
 	private static PROPRIETAR p = null;
-	
 
 	// anuleaza textul din TextField daca s-au salvat datele in tabel
 	public static boolean tfStatus(Boolean status) {
@@ -90,7 +89,7 @@ public class IFrameAuto extends JFrame {
 			tfAn.setText("");
 			tfNr.setText("");
 			tfSerie.setText("");
-				}
+		}
 		return status;
 	}
 
@@ -99,26 +98,27 @@ public class IFrameAuto extends JFrame {
 		tfAn.setText("");
 		tfNr.setText("");
 		tfSerie.setText("");
-		}
+	}
 
 	public static JInternalFrame getAutoFrame() {
 
 		if (autoFrame == null || autoFrame.isClosed()) {
 
-			autoFrame = new JInternalFrame("AUTO", false, true, false,
-					true);
+			autoFrame = new JInternalFrame("AUTO", false, true, false, true);
 
 			autoFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			autoFrame.setSize(900, 600);
 			autoFrame.setLocation(30, 20);
 			autoFrame.setVisible(true);
 
-			auto= (ArrayList<AUTO>) Factory.getInstance()
-					.getAutoDAO().getAllAuto();
-			
-			marca = (ArrayList<MARCA>) Factory.getInstance().getMarcaDAO().getAllMarca();
-			
-			proprietar = (ArrayList<PROPRIETAR>) Factory.getInstance().getProprietarDAO().getAllProprietar();
+			auto = (ArrayList<AUTO>) Factory.getInstance().getAutoDAO()
+					.getAllAuto();
+
+			marca = (ArrayList<MARCA>) Factory.getInstance().getMarcaDAO()
+					.getAllMarca();
+
+			proprietar = (ArrayList<PROPRIETAR>) Factory.getInstance()
+					.getProprietarDAO().getAllProprietar();
 
 			model = new TableModelAuto(auto);
 			t = new JTable(model);
@@ -153,7 +153,7 @@ public class IFrameAuto extends JFrame {
 			panel_lb = new JPanel();
 			panel_lb.setBorder(BorderFactory.createEmptyBorder(1, 1, 1, 1));
 			panel_lb.setLayout(new BoxLayout(panel_lb, BoxLayout.Y_AXIS));
-			//panel_lb.setBackground(Color.black);
+			// panel_lb.setBackground(Color.black);
 			// add labels
 			lbAn = new JLabel("An fabricare");
 			lbAn.setPreferredSize(new Dimension(100, 20));
@@ -164,8 +164,8 @@ public class IFrameAuto extends JFrame {
 			lbMarca = new JLabel("Marca");
 			lbMarca.setPreferredSize(new Dimension(100, 20));
 			lbProprietar = new JLabel("Proprietar");
-			lbProprietar.setPreferredSize(new Dimension(100,20));
-			
+			lbProprietar.setPreferredSize(new Dimension(100, 20));
+
 			// add TextFields
 			tfAn = new JTextField();
 			tfAn.setPreferredSize(new Dimension(200, 20));
@@ -177,33 +177,33 @@ public class IFrameAuto extends JFrame {
 			cbMarca.setPreferredSize(new Dimension(200, 20));
 			cbProprietar = new JComboBox();
 			cbProprietar.setPreferredSize(new Dimension(200, 20));
-			
+
 			line = new JPanel(new FlowLayout());
-			//line.setBackground(Color.black);
+			// line.setBackground(Color.black);
 			line.add(lbAn);
 			line.add(tfAn);
 			panel_lb.add(line);
 
 			line = new JPanel(new FlowLayout());
-			//line.setBackground(Color.green);
+			// line.setBackground(Color.green);
 			line.add(lbNr);
 			line.add(tfNr);
 			panel_lb.add(line);
 
 			line = new JPanel(new FlowLayout());
-			//line.setBackground(Color.blue);
+			// line.setBackground(Color.blue);
 			line.add(lbSerie);
 			line.add(tfSerie);
 			panel_lb.add(line);
 
 			line = new JPanel(new FlowLayout());
-			//line.setBackground(Color.cyan);
+			// line.setBackground(Color.cyan);
 			line.add(lbMarca);
 			line.add(cbMarca);
 			panel_lb.add(line);
 
 			line = new JPanel(new FlowLayout());
-			//line.setBackground(Color.darkGray);
+			// line.setBackground(Color.darkGray);
 			line.add(lbProprietar);
 			line.add(cbProprietar);
 			panel_lb.add(line);
@@ -215,7 +215,7 @@ public class IFrameAuto extends JFrame {
 			panel_table.setVisible(true);
 			panel_table.setSize(new Dimension(300, 300));
 			panel_table.setLocation(0, 0);
-			//panel_table.setBackground(Color.white);
+			// panel_table.setBackground(Color.white);
 			panel_table.setPreferredSize(new Dimension(300, 300));
 			scrollPane = new JScrollPane(t);
 
@@ -228,15 +228,15 @@ public class IFrameAuto extends JFrame {
 			panel_table.add(panel_refresh, BorderLayout.PAGE_END);
 			panel_table.add(scrollPane, BorderLayout.CENTER);
 
-			String[] searchNameCol = { "---------", "An fabricare", "Nr. inmatriculare",
-					"Serie motor", "Marca", "Proprietar" };
-			
+			String[] searchNameCol = { "---------", "An fabricare",
+					"Nr. inmatriculare", "Serie motor", "Marca", "Proprietar" };
+
 			java.util.Iterator<MARCA> iterator = marca.iterator();
 			while (iterator.hasNext()) {
-				 m1 = (MARCA) iterator.next();
-				cbMarca.addItem(m1.getId_marca());
+				m1 = (MARCA) iterator.next();
+				cbMarca.addItem(m1.getDen_marca());
 			}
-			
+
 			java.util.Iterator<PROPRIETAR> iterator1 = proprietar.iterator();
 			while (iterator1.hasNext()) {
 				p = (PROPRIETAR) iterator1.next();
@@ -296,18 +296,17 @@ public class IFrameAuto extends JFrame {
 							a.setId_auto(null);
 							a.setAn_fabr(Integer.valueOf(tfAn.getText()
 									.toString()));
-							a.setNr_inmatr(Integer.valueOf(tfNr.getText()
-									.toString()));
-							a.setSerie_motor(Integer.valueOf(tfSerie.getText()
-									.toString()));
+							a.setNr_inmatr(tfNr.getText());
+							a.setSerie_motor(tfSerie.getText());
 							a.setId_marca(marca.get(cbMarca.getSelectedIndex()));
-							a.setId_proprietar(proprietar.get(cbProprietar.getSelectedIndex()));
-							
+							a.setId_proprietar(proprietar.get(cbProprietar
+									.getSelectedIndex()));
+
 						} catch (NumberFormatException e) {
 						}
 						try {
-							boolean status = Factory.getInstance()
-									.getAutoDAO().addAuto(a);
+							boolean status = Factory.getInstance().getAutoDAO()
+									.addAuto(a);
 							tfStatus(status);
 						} catch (Exception e1) {
 							JOptionPane
@@ -364,10 +363,11 @@ public class IFrameAuto extends JFrame {
 				try {
 					a = auto.get(t.getSelectedRow());
 					tfAn.setText(Integer.valueOf(a.getAn_fabr()).toString());
-					tfNr.setText(Integer.valueOf(a.getNr_inmatr()).toString());
-					tfSerie.setText(Integer.valueOf(a.getSerie_motor()).toString());
+					tfNr.setText(a.getNr_inmatr());
+					tfSerie.setText(a.getSerie_motor());
 					cbMarca.setSelectedItem(a.getId_marca().getDen_marca());
-					cbProprietar.setSelectedItem(a.getId_proprietar().getNume());
+					cbProprietar
+							.setSelectedItem(a.getId_proprietar().getNume());
 
 					panel_lb.setVisible(true);
 					btnUpdate.setEnabled(true);
@@ -395,12 +395,16 @@ public class IFrameAuto extends JFrame {
 							status = Factory
 									.getInstance()
 									.getAutoDAO()
-									.updateModel(a.getId_auto(), 
-											Integer.valueOf(tfAn.getText().toString()),
-											Integer.valueOf(tfNr.getText().toString()),
-											Integer.valueOf(tfSerie.getText().toString()),
-											marca.get(cbMarca.getSelectedIndex()), 
-											proprietar.get(cbProprietar.getSelectedIndex()));
+									.updateModel(
+											a.getId_auto(),
+											Integer.valueOf(tfAn.getText()
+													.toString()),
+											tfNr.getText(),
+											tfSerie.getText(),
+											marca.get(cbMarca
+													.getSelectedIndex()),
+											proprietar.get(cbProprietar
+													.getSelectedIndex()));
 						} catch (NumberFormatException e) {
 							JOptionPane.showMessageDialog(null,
 									"Nu ati introdus corect datele", " Eroare",
@@ -432,7 +436,11 @@ public class IFrameAuto extends JFrame {
 					Runnable r = new Runnable() {
 
 						public void run() {
-							
+							auto = (ArrayList<AUTO>) Factory
+									.getInstance()
+									.getAutoDAO()
+									.searchByAn(
+											Integer.valueOf(tfSearch.getText()));
 
 						}
 					};
@@ -445,8 +453,9 @@ public class IFrameAuto extends JFrame {
 					r = new Runnable() {
 
 						public void run() {
-						
-
+							auto = (ArrayList<AUTO>) Factory.getInstance()
+									.getAutoDAO()
+									.searchByNr(tfSearch.getText());
 						}
 					};
 					(new Thread(r)).start();
@@ -457,7 +466,9 @@ public class IFrameAuto extends JFrame {
 					r = new Runnable() {
 
 						public void run() {
-						
+							auto = (ArrayList<AUTO>) Factory.getInstance()
+									.getAutoDAO()
+									.searchBySerie(tfSearch.getText());
 						}
 					};
 					(new Thread(r)).start();
@@ -468,7 +479,7 @@ public class IFrameAuto extends JFrame {
 					r = new Runnable() {
 
 						public void run() {
-						
+
 						}
 					};
 
@@ -481,7 +492,7 @@ public class IFrameAuto extends JFrame {
 					r = new Runnable() {
 
 						public void run() {
-						
+
 						}
 					};
 					(new Thread(r)).start();
@@ -492,7 +503,7 @@ public class IFrameAuto extends JFrame {
 					r = new Runnable() {
 
 						public void run() {
-						
+
 						}
 					};
 					(new Thread(r)).start();
@@ -543,8 +554,7 @@ public class IFrameAuto extends JFrame {
 			}
 
 			void verify() {
-				if (tfAn.getText().equals("")
-						|| tfNr.getText().equals("")
+				if (tfAn.getText().equals("") || tfNr.getText().equals("")
 						|| tfSerie.getText().equals("")) {
 					btnSave.setEnabled(false);
 					btnUpdate.setEnabled(false);
@@ -558,7 +568,6 @@ public class IFrameAuto extends JFrame {
 		tfAn.getDocument().addDocumentListener(docListener);
 		tfNr.getDocument().addDocumentListener(docListener);
 		tfSerie.getDocument().addDocumentListener(docListener);
-		
 
 		autoFrame.pack();
 		return autoFrame;

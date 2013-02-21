@@ -15,7 +15,6 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -27,9 +26,6 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 import TModel.TableModelMecanic;
 
 import com.service.auto.Factory;
@@ -253,15 +249,16 @@ public class IFrameMecanic extends JFrame {
 
 			mecanicFrame.add(panel_table, BorderLayout.PAGE_START);
 
-			btnAdd.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					panel_lb.setVisible(true);
-					btnCancel.setEnabled(true);
-					mecanicFrame.pack();
-				}
-			});
-
+		
 		}
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel_lb.setVisible(true);
+				btnCancel.setEnabled(true);
+				mecanicFrame.pack();
+			}
+		});
+
 
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

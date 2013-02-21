@@ -1,31 +1,21 @@
 package com.service.auto.Interface;
 
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.AbstractButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingUtilities;
-import javax.swing.table.TableModel;
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
-
-import org.omg.PortableInterceptor.INACTIVE;
-
-import com.service.auto.Factory;
 import com.service.auto.MECANIC;
 
 public class MainFrame extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+	
 	ArrayList<MECANIC> mecanic = new ArrayList<MECANIC>();
 	private JMenuBar menuBar;
 	private Font font;
@@ -39,9 +29,7 @@ public class MainFrame extends JFrame {
 	private JMenuItem modelTable;
 	private JMenuItem operatieTable;
 	private JMenuItem pieseTable;
-	private JTable table;
-	private JScrollPane scrollPane;
-
+	
 	public MainFrame() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Administration page");
@@ -127,9 +115,7 @@ public class MainFrame extends JFrame {
 						desktopPane.add(IFrameProprietar.getProprietarFrame());
 					}
 				};
-				(new Thread(r)).start();
-			
-				
+				(new Thread(r)).start();	
 		
 			}
 		});
@@ -177,7 +163,14 @@ public class MainFrame extends JFrame {
 
 		autoTable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				desktopPane.add(IFrameAuto.getAutoFrame());
+				Runnable r = new Runnable() {
+					
+					public void run() {
+						desktopPane.add(IFrameAuto.getAutoFrame());		
+						
+					}
+				};
+				(new Thread(r)).start();
 			}
 		});
 		

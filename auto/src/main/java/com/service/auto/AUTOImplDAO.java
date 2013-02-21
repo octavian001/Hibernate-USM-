@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 public class AUTOImplDAO {
 	
@@ -72,7 +76,7 @@ public class AUTOImplDAO {
 		  }
 	
 	
-	 public boolean updateModel(Integer id, int an, int nr,int serie, MARCA idm,PROPRIETAR idp) throws SQLException {
+	 public boolean updateModel(Integer id, int an, String nr,String serie, MARCA idm,PROPRIETAR idp) throws SQLException {
 
 			Session session = null;
 			try {
@@ -101,6 +105,64 @@ public class AUTOImplDAO {
 			return false;
 		}
 
+/* Search methods*/
+		public Collection<AUTO> searchByAn(int an) {
+			Session session = null;
+			List<AUTO> m = new ArrayList<AUTO>();
 
+			try {
+				session = HibernateUtil.getSessionFactory().openSession();
+				session.beginTransaction();
+				m = session.createQuery("from AUTO where an_fabr like :an")
+						.setString("an", "%" + an + "%").list();
 
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Eroare", " Eroare",
+						JOptionPane.OK_OPTION);
+			} finally {
+				if (session.isOpen() && session != null)
+					session.close();
+			}
+			return m;
+		}
+
+		public Collection<AUTO> searchByNr(String nr) {
+			Session session = null;
+			List<AUTO> m = new ArrayList<AUTO>();
+
+			try {
+				session = HibernateUtil.getSessionFactory().openSession();
+				session.beginTransaction();
+				Criteria criteria = session.createCriteria(AUTO.class);
+				m = criteria.add(Restrictions.ilike("nr_inmatr", "%" + nr + "%"))
+						.list();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Eroare", " Eroare",
+						JOptionPane.OK_OPTION);
+			} finally {
+				if (session.isOpen() && session != null)
+					session.close();
+			}
+			return m;
+		}
+		
+		public Collection<AUTO> searchBySerie(String serie) {
+			Session session = null;
+			List<AUTO> m = new ArrayList<AUTO>();
+
+			try {
+				session = HibernateUtil.getSessionFactory().openSession();
+				session.beginTransaction();
+				Criteria criteria = session.createCriteria(AUTO.class);
+				m = criteria.add(Restrictions.ilike("serie_motor", "%" + serie + "%"))
+						.list();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Eroare", " Eroare",
+						JOptionPane.OK_OPTION);
+			} finally {
+				if (session.isOpen() && session != null)
+					session.close();
+			}
+			return m;
+		}
 }
