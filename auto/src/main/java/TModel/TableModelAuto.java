@@ -40,13 +40,15 @@ public class TableModelAuto implements TableModel {
 		case 2:
 			return "Nr. inmatriculare";
 		case 3:
-			return "Serie motor";
+			return "Cod Auto";
 		case 4:
 			return "Marca";
 		case 5:
-			return "Nume";
+			return "Model";
 		case 6:
-			return "Prenume";
+			return "Nume";
+		/*case 7:
+			return "Prenume"; */
 		}
 		return "";
 	}
@@ -67,11 +69,13 @@ public class TableModelAuto implements TableModel {
 		case 3:
 			return auto.get(rowIndex).getSerie_motor();
 		case 4:
-			return  auto.get(rowIndex).getId_marca().getDen_marca();
+			return auto.get(rowIndex).getId_model().getMarca().getDen_marca();
 		case 5:
-			return  auto.get(rowIndex).getId_proprietar().getNume();
+			return  auto.get(rowIndex).getId_model().getDen_model();
 		case 6:
-			return auto.get(rowIndex).getId_proprietar().getPrenume();
+			return  auto.get(rowIndex).getId_proprietar().getNume()+" " + auto.get(rowIndex).getId_proprietar().getPrenume();
+		/*case 7:
+			return auto.get(rowIndex).getId_proprietar().getPrenume(); */
 		}
 		return "";
 	}

@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -37,6 +38,7 @@ import com.service.auto.AUTO;
 import com.service.auto.Factory;
 import com.service.auto.MARCA;
 import com.service.auto.MECANIC;
+import com.service.auto.MODEL;
 import com.service.auto.PROPRIETAR;
 
 public class IFrameAuto extends JFrame {
@@ -77,11 +79,54 @@ public class IFrameAuto extends JFrame {
 	private static JPanel panel_search = null;
 	private static JPanel panel = null;
 
-	private static ArrayList<MARCA> marca = null;
-	private static MARCA m1 = null;
+	private static ArrayList<MODEL> mod = null;
+	private static MODEL m1 = null;
 
 	private static ArrayList<PROPRIETAR> proprietar = null;
 	private static PROPRIETAR p = null;
+
+	private static ArrayList<MARCA> marca = null;
+	private static MARCA m = null;
+
+	private static JLabel lbMarca1;
+	private static JComboBox cbMarca1;
+
+	public static void comboboxLoad() {
+
+		java.util.Iterator<MARCA> iter = marca.iterator();
+		while (iter.hasNext()) {
+			m = (MARCA) iter.next();
+			cbMarca1.addItem(m.getDen_marca());
+		}
+
+		cbMarca1.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				// cbMarca1 = (JComboBox)e.getSource();
+				if (!cbMarca.equals(0)) {
+					cbMarca.removeAllItems();
+				}
+				
+				java.util.Iterator<MODEL> iterator = mod.iterator();
+				while (iterator.hasNext()) {
+					m1 = (MODEL) iterator.next();
+					if (marca.get(cbMarca1.getSelectedIndex()).getId_marca()
+							.equals(m1.getMarca().getId_marca())) {
+
+						cbMarca.addItem(m1.getDen_model());
+					}
+				}
+
+			}
+		});
+
+		java.util.Iterator<PROPRIETAR> iterator1 = proprietar.iterator();
+		while (iterator1.hasNext()) {
+			p = (PROPRIETAR) iterator1.next();
+			cbProprietar.addItem(p.getNume() + " " + p.getPrenume());
+		}
+
+	}
 
 	// anuleaza textul din TextField daca s-au salvat datele in tabel
 	public static boolean tfStatus(Boolean status) {
@@ -114,11 +159,14 @@ public class IFrameAuto extends JFrame {
 			auto = (ArrayList<AUTO>) Factory.getInstance().getAutoDAO()
 					.getAllAuto();
 
-			marca = (ArrayList<MARCA>) Factory.getInstance().getMarcaDAO()
-					.getAllMarca();
+			mod = (ArrayList<MODEL>) Factory.getInstance().getModelDAO()
+					.getAllModel();
 
 			proprietar = (ArrayList<PROPRIETAR>) Factory.getInstance()
 					.getProprietarDAO().getAllProprietar();
+
+			marca = (ArrayList<MARCA>) Factory.getInstance().getMarcaDAO()
+					.getAllMarca();
 
 			model = new TableModelAuto(auto);
 			t = new JTable(model);
@@ -132,12 +180,13 @@ public class IFrameAuto extends JFrame {
 			JPanel rightPanel = new JPanel();
 			btnDelete = new JButton("Delete");
 			rightPanel.add(btnDelete);
-			btnSave = new JButton("Save");
+			btnSave = new JButton(" Save ");
 			btnSave.setEnabled(false);
 			btnCancel = new JButton("Cancel");
 			btnCancel.setEnabled(false);
 			btnUpdate = new JButton("Update");
 			btnUpdate.setEnabled(false);
+
 			rightPanel.add(btnUpdate);
 
 			rightPanel.add(btnSave);
@@ -159,9 +208,11 @@ public class IFrameAuto extends JFrame {
 			lbAn.setPreferredSize(new Dimension(100, 20));
 			lbNr = new JLabel("Numar inmatriculare");
 			lbNr.setPreferredSize(new Dimension(100, 20));
-			lbSerie = new JLabel("Serie motor");
+			lbSerie = new JLabel("Cod auto");
+			lbMarca1 = new JLabel("Marca");
+			lbMarca1.setPreferredSize(new Dimension(100, 20));
 			lbSerie.setPreferredSize(new Dimension(100, 20));
-			lbMarca = new JLabel("Marca");
+			lbMarca = new JLabel("Model");
 			lbMarca.setPreferredSize(new Dimension(100, 20));
 			lbProprietar = new JLabel("Proprietar");
 			lbProprietar.setPreferredSize(new Dimension(100, 20));
@@ -173,6 +224,8 @@ public class IFrameAuto extends JFrame {
 			tfNr.setPreferredSize(new Dimension(200, 20));
 			tfSerie = new JTextField();
 			tfSerie.setPreferredSize(new Dimension(200, 20));
+			cbMarca1 = new JComboBox();
+			cbMarca1.setPreferredSize(new Dimension(200, 20));
 			cbMarca = new JComboBox();
 			cbMarca.setPreferredSize(new Dimension(200, 20));
 			cbProprietar = new JComboBox();
@@ -194,6 +247,11 @@ public class IFrameAuto extends JFrame {
 			// line.setBackground(Color.blue);
 			line.add(lbSerie);
 			line.add(tfSerie);
+			panel_lb.add(line);
+
+			line = new JPanel(new FlowLayout());
+			line.add(lbMarca1);
+			line.add(cbMarca1);
 			panel_lb.add(line);
 
 			line = new JPanel(new FlowLayout());
@@ -228,20 +286,11 @@ public class IFrameAuto extends JFrame {
 			panel_table.add(panel_refresh, BorderLayout.PAGE_END);
 			panel_table.add(scrollPane, BorderLayout.CENTER);
 
+			comboboxLoad();
+
 			String[] searchNameCol = { "---------", "An fabricare",
 					"Nr. inmatriculare", "Serie motor", "Marca", "Proprietar" };
 
-			java.util.Iterator<MARCA> iterator = marca.iterator();
-			while (iterator.hasNext()) {
-				m1 = (MARCA) iterator.next();
-				cbMarca.addItem(m1.getDen_marca());
-			}
-
-			java.util.Iterator<PROPRIETAR> iterator1 = proprietar.iterator();
-			while (iterator1.hasNext()) {
-				p = (PROPRIETAR) iterator1.next();
-				cbProprietar.addItem(p.getNume());
-			}
 			cbSearch = new JComboBox(searchNameCol);
 			cbSearch.setPreferredSize(new Dimension(100, 20));
 
@@ -298,7 +347,7 @@ public class IFrameAuto extends JFrame {
 									.toString()));
 							a.setNr_inmatr(tfNr.getText());
 							a.setSerie_motor(tfSerie.getText());
-							a.setId_marca(marca.get(cbMarca.getSelectedIndex()));
+							a.setId_model(mod.get(cbMarca.getSelectedIndex()));
 							a.setId_proprietar(proprietar.get(cbProprietar
 									.getSelectedIndex()));
 
@@ -365,7 +414,9 @@ public class IFrameAuto extends JFrame {
 					tfAn.setText(Integer.valueOf(a.getAn_fabr()).toString());
 					tfNr.setText(a.getNr_inmatr());
 					tfSerie.setText(a.getSerie_motor());
-					cbMarca.setSelectedItem(a.getId_marca().getDen_marca());
+					cbMarca1.setSelectedItem(a.getId_model().getMarca()
+							.getDen_marca());
+					cbMarca.setSelectedItem(a.getId_model().getDen_model());
 					cbProprietar
 							.setSelectedItem(a.getId_proprietar().getNume());
 
@@ -401,8 +452,7 @@ public class IFrameAuto extends JFrame {
 													.toString()),
 											tfNr.getText(),
 											tfSerie.getText(),
-											marca.get(cbMarca
-													.getSelectedIndex()),
+											mod.get(cbMarca.getSelectedIndex()),
 											proprietar.get(cbProprietar
 													.getSelectedIndex()));
 						} catch (NumberFormatException e) {

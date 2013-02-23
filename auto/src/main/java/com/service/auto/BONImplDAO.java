@@ -73,7 +73,7 @@ public class BONImplDAO {
 			  }
 		
 		 public boolean updateBon(Integer id, String data_bon, int pret_total,AUTO ida,
-				 MECANIC idm,PROPRIETAR idp,Set<PIESE> piese,Set<OPERATIE> oper) throws SQLException {
+				 MECANIC idm,/*PROPRIETAR idp,*/Set<PIESE> piese,Set<OPERATIE> oper) throws SQLException {
 
 				Session session = null;
 				try {
@@ -86,7 +86,7 @@ public class BONImplDAO {
 				n.setPret_total(pret_total);
 				n.setId_auto(ida);
 				n.setId_mecanic(idm);
-				n.setId_proprietar(idp);
+			//	n.setId_proprietar(idp);
 				n.setPiese(piese);
 				n.setOper(oper);
 				 session.update(n);
