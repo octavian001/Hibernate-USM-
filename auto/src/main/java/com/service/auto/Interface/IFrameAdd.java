@@ -452,11 +452,11 @@ public class IFrameAdd extends JFrame {
 								// marcaObj.setDen_marca(marca.get(cbMarca.getSelectedIndex()).getDen_marca().toString());
 								// modelObj.setDen_model(model.get(cbModel.getSelectedIndex()).getDen_model().toString());
 
-								autoObj.setAn_fabr(Integer.valueOf(tfAn
+							/*	autoObj.setAn_fabr(Integer.valueOf(tfAn
 										.getText()));
 								autoObj.setNr_inmatr(tfNr.getText());
 								autoObj.setSerie_motor(tfCna.getText());
-								
+								*/
 
 								proprObj.setNume(tfNumeP.getText());
 								proprObj.setPrenume(tfPrenumeP.getText());
