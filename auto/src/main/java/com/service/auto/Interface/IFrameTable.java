@@ -54,7 +54,11 @@ public class IFrameTable extends JFrame {
 			
 			//panel_table.add(scrollPane, BorderLayout.CENTER);
 			
+<<<<<<< HEAD
 			tableForm.add(scrollPane/*, BorderLayout.PAGE_START*/);
+=======
+			tableForm.add(scrollPane, BorderLayout.PAGE_START);
+>>>>>>> 6e37936d49a8fb3f1c866bfa597601a584ef8ea9
 		}
 		return tableForm;	
 }
