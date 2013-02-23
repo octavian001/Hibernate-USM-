@@ -26,14 +26,14 @@ public class BON {
 	@Column(name = "data_bon", unique = true, nullable = false)
 	private String data_bon = null;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(/*cascade = CascadeType.ALL*/)
 	@JoinColumn(name="id_mecanic",referencedColumnName="id_mecanic")
 	private MECANIC id_mecanic = null;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	/*@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_proprietar",referencedColumnName="id_proprietar")
 	private PROPRIETAR id_proprietar = null;
-	
+	*/
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_auto",referencedColumnName="id_auto")
 	private AUTO id_auto = null;
@@ -53,12 +53,12 @@ public class BON {
 					"id_piesa"/*, nullable = false, updatable = false*/) })
 	private Set<PIESE> piese;
 	
-	public BON(String data_bon, MECANIC id_mecanic, PROPRIETAR id_proprietar,
+	public BON(String data_bon, MECANIC id_mecanic, /* PROPRIETAR id_proprietar ,*/
 			AUTO id_auto, Integer pret_total, Set<OPERATIE> oper, Set<PIESE> piese) {
 		
 		this.data_bon = data_bon;
 		this.id_mecanic = id_mecanic;
-		this.id_proprietar = id_proprietar;
+	//	this.id_proprietar = id_proprietar;
 		this.id_auto = id_auto;
 		this.pret_total = pret_total;
 		this.oper = oper;
@@ -113,11 +113,11 @@ public class BON {
 	public MECANIC getId_mecanic() {
 		return id_mecanic;
 	}
-
+/*
 	public PROPRIETAR getId_proprietar() {
 		return id_proprietar;
 	}
-
+*/
 	public AUTO getId_auto() {
 		return id_auto;
 	}
@@ -137,11 +137,11 @@ public class BON {
 	public void setId_mecanic(MECANIC id_mecanic) {
 		this.id_mecanic = id_mecanic;
 	}
-
+/*
 	public void setId_proprietar(PROPRIETAR id_proprietar) {
 		this.id_proprietar = id_proprietar;
 	}
-
+*/
 	public void setId_auto(AUTO id_auto) {
 		this.id_auto = id_auto;
 	}

@@ -1,9 +1,0 @@
-#Files
-.classpath
-.project
-.settings/
-.metadata/
-
-#Folders
-target/
-Servers/

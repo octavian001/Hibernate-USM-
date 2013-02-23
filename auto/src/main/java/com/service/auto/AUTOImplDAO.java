@@ -76,7 +76,7 @@ public class AUTOImplDAO {
 		  }
 	
 	
-	 public boolean updateModel(Integer id, int an, String nr,String serie, MARCA idm,PROPRIETAR idp) throws SQLException {
+	 public boolean updateModel(Integer id, int an, String nr,String serie, MODEL idm,PROPRIETAR idp) throws SQLException {
 
 			Session session = null;
 			try {
@@ -87,7 +87,7 @@ public class AUTOImplDAO {
 				n.setAn_fabr(an);
 				n.setNr_inmatr(nr);
 				n.setSerie_motor(serie);
-				n.setId_marca(idm);
+				n.setId_model(idm);
 				n.setId_proprietar(idp);
 					session.update(n);
 				session.getTransaction().commit();

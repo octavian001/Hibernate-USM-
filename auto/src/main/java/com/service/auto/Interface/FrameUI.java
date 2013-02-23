@@ -23,7 +23,7 @@ public class FrameUI extends JFrame {
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("User Form");
-		setSize(1000, 700);
+		setSize(1100, 700);
 		setLocation(150, 20);
 		setName("Service-Auto");
 		add(jdesktopPane);
@@ -35,8 +35,25 @@ public class FrameUI extends JFrame {
 		JMenuItem add1 = new JMenuItem("AddForm");
 	
 		addForm.add(add1);
+			
+		JMenuItem add2 = new JMenuItem("Table");
+		addForm.add(add2);
 		
 		setJMenuBar(menuBar);
+		
+		add2.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				Runnable r = new Runnable() {
+					
+					public void run() {
+						jdesktopPane.add(IFrameTable.getTableForm());
+						
+					}
+				};
+			(new Thread(r)).start();	
+			}
+		});
 
 		add1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

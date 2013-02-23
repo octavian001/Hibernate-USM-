@@ -32,8 +32,8 @@ public class AUTO {
        private Integer an_fabr = null;
 	   
 	   @ManyToOne(/*cascade = CascadeType.ALL*/)
-	   @JoinColumn(name="id_marca"/*,referencedColumnName="id_marca"*/)
-       private MARCA id_marca = null;
+	   @JoinColumn(name="id_model"/*,referencedColumnName="id_marca"*/)
+       private MODEL id_model = null;
 	   
 	   @ManyToOne(cascade = CascadeType.ALL)
 	    @JoinColumn(name="id_proprietar"/*,referencedColumnName="id_proprietar"*/)
@@ -45,12 +45,12 @@ public class AUTO {
        
 
 	   public AUTO( String nr_inmatr, String serie_motor,
-			Integer an_fabr,MARCA id_marca, PROPRIETAR id_proprietar) {
+			Integer an_fabr,MODEL id_model, PROPRIETAR id_proprietar) {
 	
 		this.nr_inmatr = nr_inmatr;
 		this.serie_motor = serie_motor;
 		this.an_fabr = an_fabr;
-		this.id_marca = id_marca;
+		this.id_model = id_model;
 		this.id_proprietar = id_proprietar;
 	}
 
@@ -70,8 +70,8 @@ public class AUTO {
 		return an_fabr;
 	}
 	
-	public MARCA getId_marca() {
-		return id_marca;
+	public MODEL getId_model() {
+		return id_model;
 	}
 	 
     public PROPRIETAR getId_proprietar() {
@@ -99,8 +99,8 @@ public class AUTO {
 		this.an_fabr = an_fabr;
 	}
 
-	public MARCA setId_marca(MARCA id_marca) {
-		return this.id_marca = id_marca;
+	public MODEL setId_model(MODEL id_model) {
+		return this.id_model = id_model;
 	}
 		
        
