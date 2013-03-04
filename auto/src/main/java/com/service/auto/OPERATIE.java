@@ -3,10 +3,13 @@ package com.service.auto;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Table;
 import javax.persistence.ManyToMany;
 import javax.persistence.FetchType;
@@ -27,6 +30,20 @@ public class OPERATIE {
 	@Column(name = "pret_oper", unique = false, nullable = false)
 	private Integer pret_oper = null;
 	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "bon_oper", joinColumns = { @JoinColumn(name =
+			"id_oper"/*, nullable = false, updatable = false*/) }, inverseJoinColumns = { @JoinColumn(name =
+					"id_bon"/*, nullable = false, updatable = false*/) })
+	private Set<BON> bon;
+	
+	public Set<BON> getBon() {
+		return bon;
+	}
+
+	public void setBon(Set<BON> bon) {
+		this.bon = bon;
+	}
+
 	public OPERATIE(){
 		
 	}

@@ -1,18 +1,28 @@
 package com.service.auto.Interface;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+
+import org.hibernate.Session;
 
 import com.service.auto.BON;
 import com.service.auto.Factory;
+import com.service.auto.HibernateUtil;
+import com.service.auto.OPERATIE;
 
 import TModel.TableModelAuto;
 import TModel.TableModelForm;
@@ -26,8 +36,10 @@ public class IFrameTable extends JFrame {
 	  private static JTable t = null;
 	  private static JScrollPane scrollPane;
 	  private static JPanel panel_table;
-	
+	  private static ArrayList<OPERATIE> oper =null;
+	  
 	public static JInternalFrame getTableForm() {
+		
 
 		if (tableForm == null || tableForm.isClosed()) {
 
@@ -53,8 +65,26 @@ public class IFrameTable extends JFrame {
 			scrollPane = new JScrollPane(t);
 			
 			//panel_table.add(scrollPane, BorderLayout.CENTER);
+			JPanel searchPanel = new JPanel(new FlowLayout());
+			JPanel panel = new JPanel();
 			
+			JTextField tfSearch = new JTextField();
+			tfSearch.setPreferredSize(new Dimension(100,20));
+			panel.add(tfSearch);
+			
+			JComboBox cbSearch = new JComboBox();
+			cbSearch.setPreferredSize(new Dimension(150,20));
+			panel.add(cbSearch);
+			
+			JButton btnSearch = new JButton("Cautare");
+			btnSearch.setPreferredSize(new Dimension(100,20));
+			panel.add(btnSearch);
+			
+			searchPanel.add(panel, FlowLayout.LEFT);
+			searchPanel.setBackground(Color.black);
+			tableForm.add(searchPanel, BorderLayout.PAGE_START);
 			tableForm.add(scrollPane/*, BorderLayout.PAGE_START*/);
+		
 		}
 		return tableForm;	
 }

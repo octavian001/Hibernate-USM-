@@ -1,9 +1,11 @@
 package com.service.auto;
 
+import java.awt.Component;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.management.Query;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.security.auth.login.Configuration;
@@ -16,6 +18,8 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.mapping.Collection;
 
+import antlr.collections.List;
+
 import com.service.auto.Interface.FrameUI;
 import com.service.auto.Interface.LoginFrame;
 import com.service.auto.Interface.MainFrame;
@@ -24,12 +28,36 @@ import com.service.auto.Interface.MainFrame;
 		
 		public class Main {
 
-			public static void main(String a[]) {
+			public static void main(String a[]) {				
+				
+				
 				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
-						new FrameUI();
+						new LoginFrame();
 					}
 				});
+				
+				
+				/*	
+					Session session = null;
+					session = HibernateUtil.getSessionFactory().openSession();
+					session.beginTransaction();
+							
+							org.hibernate.Query query =  session.createQuery("SELECT " +
+							" o FROM OPERATIE o  JOIN o.bon b WHERE b.pret_total = :t ");
+					query.setParameter("t", i);			
+					java.util.List<OPERATIE> results = (java.util.List<OPERATIE>) query.list();
+					Iterator iterator = results.iterator();
+					while(iterator.hasNext()){
+						OPERATIE mec = (OPERATIE) iterator.next();
+						System.out.println(mec.getDen_oper() );
+					}
+				
+				
+		
+			//	SELECT  p.denumire FROM PIESE p INNER JOIN bon_piese bp WHERE pb.bon_id =: 1
+						
+				/*	 */
 				/*
 				Session session = HibernateUtil.getSessionFactory().openSession();
 				session.beginTransaction();

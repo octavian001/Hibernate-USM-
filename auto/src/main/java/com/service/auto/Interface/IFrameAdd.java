@@ -124,7 +124,7 @@ public class IFrameAdd extends JFrame {
 
 		if (addForm == null || addForm.isClosed()) {
 
-			addForm = new JInternalFrame("Add", false, true, false, true);
+			addForm = new JInternalFrame("Adauga", false, true, false, true);
 
 			piese = (ArrayList<PIESE>) Factory.getInstance().getPieseDAO()
 					.getAllPIESE();
@@ -320,8 +320,8 @@ public class IFrameAdd extends JFrame {
 			panel.add(panelBon);
 
 			btnPanel = new JPanel();
-			btnAdd = new JButton("Add");
-			btnCancel = new JButton("Cancel");
+			btnAdd = new JButton("Adauga");
+			btnCancel = new JButton("Anuleaza");
 
 			btnPanel.add(btnAdd);
 			btnPanel.add(btnCancel);
@@ -394,7 +394,7 @@ public class IFrameAdd extends JFrame {
 				public void actionPerformed(ActionEvent arg0) {
 					Object[] var = { "Da", "Nu" };
 					int n = JOptionPane.showOptionDialog(null,
-							"Adauga operatie ?", "Confirmation",
+							"Adauga operatie ?", "Confirmare",
 							JOptionPane.YES_NO_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, var, var[0]);
 					if (n == 0) {
@@ -410,7 +410,7 @@ public class IFrameAdd extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					Object[] var = { "Da", "Nu" };
 					int n = JOptionPane.showOptionDialog(null,
-							"Adauga piesa ?", "Confirmation",
+							"Adauga piesa ?", "Confirmare",
 							JOptionPane.YES_NO_OPTION,
 							JOptionPane.QUESTION_MESSAGE, null, var, var[0]);
 					if (n == 0) {

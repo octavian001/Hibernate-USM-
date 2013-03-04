@@ -112,19 +112,19 @@ public class IFrameMecanic extends JFrame {
 			t = new JTable(model);
 			// panel for buttons
 			JPanel leftPanel = new JPanel();
-			btnAdd = new JButton("Add");
-			btnEdit = new JButton("Edit");
+			btnAdd = new JButton("Adaugare");
+			btnEdit = new JButton("Editare");
 			leftPanel.add(btnAdd);
 			leftPanel.add(btnEdit);
 
 			JPanel rightPanel = new JPanel();
-			btnDelete = new JButton("Delete");
+			btnDelete = new JButton("Stergere");
 			rightPanel.add(btnDelete);
-			btnSave = new JButton("Save");
+			btnSave = new JButton("Salvare");
 			btnSave.setEnabled(false);
-			btnCancel = new JButton("Cancel");
+			btnCancel = new JButton("Anulare");
 			btnCancel.setEnabled(false);
-			btnUpdate = new JButton("Update");
+			btnUpdate = new JButton("Reinoire");
 			btnUpdate.setEnabled(false);
 			rightPanel.add(btnUpdate);
 
@@ -217,7 +217,7 @@ public class IFrameMecanic extends JFrame {
 			panel_table.setPreferredSize(new Dimension(300, 300));
 			scrollPane = new JScrollPane(t);
 
-			btnRefresh = new JButton("Refresh");
+			btnRefresh = new JButton("Actualizare");
 			btnRefresh.setPreferredSize(new Dimension(100, 25));
 			// btnRefresh.setAlignmentX(btnRefresh.RIGHT_ALIGNMENT);
 
@@ -231,7 +231,7 @@ public class IFrameMecanic extends JFrame {
 			cbSearch = new JComboBox(searchNameCol);
 			cbSearch.setPreferredSize(new Dimension(100, 20));
 
-			btnSearch = new JButton("Search");
+			btnSearch = new JButton("Cautare");
 			// btnSearch.setPreferredSize(new Dimension(100, 20));
 
 			tfSearch = new JTextField();

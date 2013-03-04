@@ -12,6 +12,7 @@ public class Factory {
 		private static OPERATIEImplDAO operatieImplDAO = null;
 		private static PIESEImplDAO pieseImplDAO = null;
 		private static PROPRIETARImplDAO proprietarImplDAO = null;
+		private static USERImplDAO userImplDAO =null;
 		
 				private static Factory instance = null;
 
@@ -77,6 +78,13 @@ public class Factory {
 				proprietarImplDAO = new PROPRIETARImplDAO();
 			}
 			return proprietarImplDAO;
+		}
+		
+		public USERImplDAO getUserDAO() {
+			if (userImplDAO == null) {
+				userImplDAO = new USERImplDAO();
+			}
+			return userImplDAO;
 		}
 	}
 

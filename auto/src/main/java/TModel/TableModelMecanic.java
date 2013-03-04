@@ -12,7 +12,6 @@ import com.service.auto.*;
 
 public class TableModelMecanic extends AbstractTableModel {
 	
-	private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
     private List<MECANIC> mec;
     
     public TableModelMecanic(List<MECANIC> mec){
@@ -20,8 +19,7 @@ public class TableModelMecanic extends AbstractTableModel {
     }
     
     
-	public void addTableModelListener(TableModelListener listener) {
-	  listeners.add(listener);	
+	public void addTableModelListener(TableModelListener listener) {	
 		
 	}
 
@@ -84,7 +82,6 @@ public class TableModelMecanic extends AbstractTableModel {
 	}
 
 	public void removeTableModelListener(TableModelListener listener) {
-		listeners.remove(listener);
 		
 	}
 

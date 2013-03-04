@@ -15,7 +15,7 @@ import com.service.auto.MECANIC;
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	ArrayList<MECANIC> mecanic = new ArrayList<MECANIC>();
 	private JMenuBar menuBar;
 	private Font font;
@@ -29,10 +29,19 @@ public class MainFrame extends JFrame {
 	private JMenuItem modelTable;
 	private JMenuItem operatieTable;
 	private JMenuItem pieseTable;
-	
-	public MainFrame() {
+	private JMenuItem userTable;
+
+	JProgressDialog jpd = null;
+	private JFrame me = this;
+
+	public MainFrame(Boolean state) {
+		if(state == false){
+			dispose();
+			
+		}
+		else{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setTitle("Administration page");
+		setTitle("Pagina de administrare");
 		setSize(1000, 700);
 		setLocation(150, 20);
 		setName("Service-Auto");
@@ -51,9 +60,9 @@ public class MainFrame extends JFrame {
 		fontOptionMenu = new Font("Times New Roman", Font.ITALIC, 12);
 
 		// adaugam o categorie meniului
-		tableMenu = new JMenu("Table");
+		tableMenu = new JMenu("Tabele");
 		tableMenu.setFont(font);
-
+		
 		// adaugam o optiune meniului
 		mecanicTable = new JMenuItem("MECANIC");
 		mecanicTable.setFont(fontOptionMenu);
@@ -76,7 +85,7 @@ public class MainFrame extends JFrame {
 		tableMenu.add(modelTable);
 
 		operatieTable = new JMenuItem("OPERATIE");
-		modelTable.setFont(fontOptionMenu);
+		operatieTable.setFont(fontOptionMenu);
 		tableMenu.add(operatieTable);
 
 		pieseTable = new JMenuItem("PIESE");
@@ -86,77 +95,133 @@ public class MainFrame extends JFrame {
 		proprietarTable = new JMenuItem("PROPRIETAR");
 		proprietarTable.setFont(fontOptionMenu);
 		tableMenu.add(proprietarTable);
-		
 
+		userTable = new JMenuItem("User detalii");
+		userTable.setFont(fontOptionMenu);
+		tableMenu.add(userTable);
+
+		
 		menuBar.add(tableMenu);
 		setJMenuBar(menuBar);
-
-		mecanicTable.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Runnable r = new Runnable() {
-
-					public void run() {
-						// cream fereastra interioara
-						desktopPane.add(IFrameMecanic.getMecanicFrame());
-					}
-				};
-				(new Thread(r)).start();
-			}
-
-		});
 		
-		proprietarTable.addActionListener(new ActionListener() {
+		jpd = new JProgressDialog(me, "Please Wait",
+				"Stabilirea conexiunii cu BD.");
+
+		userTable.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
 				Runnable r = new Runnable() {
-
 					public void run() {
-						// cream fereastra interioara
-						desktopPane.add(IFrameProprietar.getProprietarFrame());
-					}
-				};
-				(new Thread(r)).start();	
-		
-			}
-		});
-		
-		pieseTable.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
-				Runnable r =  new Runnable() {
-					
-					public void run() {
-						desktopPane.add(IFramePiese.getPieseFrame());
 						
+						desktopPane.add(IFrameUser.getUserFrame());
+						jpd.setVisible(false);
+						setEnabled(true);
+						me.setEnabled(true);
 					}
 				};
+				jpd.setVisible(true);
+				setEnabled(true);
+				me.setEnabled(false);
 				(new Thread(r)).start();
 				
 			}
 		});
 		
-		marcaTable.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent arg0) {
+		
+		mecanicTable.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
 				Runnable r = new Runnable() {
-					
 					public void run() {
-					      desktopPane.add(IFrameMarca.getMarcaFrame());
-						
+						// cream fereastra interioara
+						desktopPane.add(IFrameMecanic.getMecanicFrame());
+						jpd.setVisible(false);
+						setEnabled(true);
+						me.setEnabled(true);
 					}
 				};
+				jpd.setVisible(true);
+				setEnabled(true);
+				me.setEnabled(false);
+				(new Thread(r)).start();
+			}
+
+		});
+
+		proprietarTable.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+
+				Runnable r = new Runnable() {
+					public void run() {
+						// cream fereastra interioara
+						desktopPane.add(IFrameProprietar.getProprietarFrame());
+						jpd.setVisible(false);
+						setEnabled(true);
+						me.setEnabled(true);
+					}
+				};
+				jpd.setVisible(true);
+				setEnabled(true);
+				me.setEnabled(false);
+				(new Thread(r)).start();
+
+			}
+		});
+
+		pieseTable.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+
+				Runnable r = new Runnable() {
+					public void run() {
+						desktopPane.add(IFramePiese.getPieseFrame());
+						jpd.setVisible(false);
+						setEnabled(true);
+						me.setEnabled(true);
+					}
+				};
+				jpd.setVisible(true);
+				setEnabled(true);
+				me.setEnabled(false);
+				(new Thread(r)).start();
+
+			}
+		});
+
+		marcaTable.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+				Runnable r = new Runnable() {
+
+					public void run() {
+						desktopPane.add(IFrameMarca.getMarcaFrame());
+						jpd.setVisible(false);
+						setEnabled(true);
+						me.setEnabled(true);
+					}
+				};
+				jpd.setVisible(true);
+				setEnabled(true);
+				me.setEnabled(false);
 				(new Thread(r)).start();
 			}
 		});
-		
+
 		operatieTable.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent arg0) {
-				Runnable r = new Runnable(){
-					public void run(){
+				Runnable r = new Runnable() {
+					public void run() {
 						desktopPane.add(IFrameOperatie.getOperatieFrame());
+						jpd.setVisible(false);
+						setEnabled(true);
+						me.setEnabled(true);
 					}
 				};
+				jpd.setVisible(true);
+				setEnabled(true);
+				me.setEnabled(false);
 				(new Thread(r)).start();
 			}
 		});
@@ -164,30 +229,41 @@ public class MainFrame extends JFrame {
 		autoTable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Runnable r = new Runnable() {
-					
 					public void run() {
-						desktopPane.add(IFrameAuto.getAutoFrame());		
-						
+						desktopPane.add(IFrameAuto.getAutoFrame());
+						jpd.setVisible(false);
+						setEnabled(true);
+						me.setEnabled(true);
 					}
 				};
+				jpd.setVisible(true);
+				setEnabled(true);
+				me.setEnabled(false);
 				(new Thread(r)).start();
 			}
 		});
-		
+
 		modelTable.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent arg0) {
-			 Runnable r = new Runnable() {
-				
-				public void run() {
-					desktopPane.add(IFrameModel.getModelFrame());
-								
-				}
-			};
+				jpd = new JProgressDialog(me, "Please Wait",
+						"Stabilirea conexiunii cu BD.");
+				Runnable r = new Runnable() {
+					public void run() {
+						desktopPane.add(IFrameModel.getModelFrame());
+						jpd.setVisible(false);
+						setEnabled(true);
+						me.setEnabled(true);
+					}
+				};
+				jpd.setVisible(true);
+				setEnabled(true);
+				me.setEnabled(false);
 				(new Thread(r)).start();
 			}
 		});
 
 		setVisible(true);
+	}
 	}
 }

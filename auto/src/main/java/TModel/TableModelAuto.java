@@ -12,7 +12,7 @@ import com.service.auto.MECANIC;
 
 public class TableModelAuto implements TableModel {
 	
-	private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
+	
     private List<AUTO> auto;
   
       public TableModelAuto(List<AUTO> auto) {
@@ -20,7 +20,7 @@ public class TableModelAuto implements TableModel {
 	}
 
 	public void addTableModelListener(TableModelListener listener) {
-		listeners.add(listener);
+	
 	}
 
 	public Class<?> getColumnClass(int columnIndex) {
@@ -85,7 +85,7 @@ public class TableModelAuto implements TableModel {
 	}
 
 	public void removeTableModelListener(TableModelListener listener) {
-		listeners.add(listener);
+	
 				
 	}
 

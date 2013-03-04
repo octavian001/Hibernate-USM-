@@ -12,7 +12,6 @@ import com.service.auto.*;
 
 public class TableModelMod extends AbstractTableModel {
 
-	private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
 	private List<MODEL> model;
 	private MODEL m;
 
@@ -21,7 +20,6 @@ public class TableModelMod extends AbstractTableModel {
 	}
 
 	public void addTableModelListener(TableModelListener listener) {
-		listeners.add(listener);
 
 	}
 
@@ -68,7 +66,6 @@ public class TableModelMod extends AbstractTableModel {
 	}
 
 	public void removeTableModelListener(TableModelListener listener) {
-		listeners.remove(listener);
 
 	}
 

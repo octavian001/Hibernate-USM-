@@ -12,7 +12,7 @@ import com.service.auto.*;
 
 public class TableModelProprietar extends AbstractTableModel {
 	
-	private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
+	//private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
     private List<PROPRIETAR> proprietar;
     
     public TableModelProprietar(List<PROPRIETAR> proprietar){
@@ -21,7 +21,7 @@ public class TableModelProprietar extends AbstractTableModel {
     
     
 	public void addTableModelListener(TableModelListener listener) {
-	  listeners.add(listener);	
+	  //listeners.add(listener);	
 		
 	}
 
@@ -80,7 +80,7 @@ public class TableModelProprietar extends AbstractTableModel {
 	}
 
 	public void removeTableModelListener(TableModelListener listener) {
-		listeners.remove(listener);
+		//listeners.remove(listener);
 		
 	}
 

@@ -10,19 +10,17 @@ import javax.swing.table.TableModel;
 
 import com.service.auto.*;
 
-public class TableModelOperatie extends AbstractTableModel {
-	
-	//private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
-    private List<OPERATIE> oper;
-    
-    public TableModelOperatie(List<OPERATIE> oper){
-    	this.oper = oper;
-    }
-    
-    
+public class TableModelUser extends AbstractTableModel {
+
+	private List<USERS> user;
+	private USERS m;
+
+	public TableModelUser(List<USERS> user) {
+		this.user = user;
+	}
+
 	public void addTableModelListener(TableModelListener listener) {
-	  //listeners.add(listener);	
-		
+
 	}
 
 	public Class<?> getColumnClass(int columnIndex) {
@@ -30,45 +28,49 @@ public class TableModelOperatie extends AbstractTableModel {
 	}
 
 	public int getColumnCount() {
-		return 3;
+		return 4;
 	}
 
 	public String getColumnName(int columnIndex) {
-      switch (columnIndex) {
-	case 0:
-		return "ID";
-	case 1:
-		return "Denumire";
-	case 2:
-		return "Pret";
-	}
+		switch (columnIndex) {
+		case 0:
+			return "ID";
+		case 1:
+			return "Nume utilizator";
+		case 2:
+			return "Parola utilizator";
+		case 3:
+			return "Categorie utilizator";
+		}
 		return "";
 	}
 
 	public int getRowCount() {
-		return oper.size();
+		return user.size();
 	}
+
 	public Object getValueAt(int rowIndex, int columnIndex) {
-	   OPERATIE o = oper.get(rowIndex);
-	   switch (columnIndex) {
-	case 0:
-		return o.getId_oper();
-	case 1:
-		return o.getDen_oper();
-	case 2:
-		return o.getPret_oper();	
-	   }
+		 m = user.get(rowIndex);
+		switch (columnIndex) {
+		case 0:
+			return user.get(rowIndex).getUser_id();
+		case 1:
+			return user.get(rowIndex).getUser();
+		case 2:
+			return   user.get(rowIndex).getPassword();
+		case 3:
+			return user.get(rowIndex).getRole();
+		}
 		return "";
 	}
 
-	//reeditarea coloanelor
+	// reeditarea coloanelor
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		return false;
 	}
 
 	public void removeTableModelListener(TableModelListener listener) {
-		//listeners.remove(listener);
-		
+
 	}
 
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {

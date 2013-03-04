@@ -14,7 +14,7 @@ import com.service.auto.*;
 
 public class TableModelForm extends AbstractTableModel {
 
-	private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
+	
 	private List<MODEL> model;
 	private List<MARCA> marca;
 	private List<AUTO> auto;
@@ -25,7 +25,7 @@ public class TableModelForm extends AbstractTableModel {
 	private List<BON> bon;
 
 	private BON m;
-
+	
 	public TableModelForm(/*
 						 * List<MODEL> model, List<MARCA> marca, List<AUTO>
 						 * auto, List<PROPRIETAR> proprietar, List<MECANIC>
@@ -40,7 +40,6 @@ public class TableModelForm extends AbstractTableModel {
 	}
 
 	public void addTableModelListener(TableModelListener listener) {
-		listeners.add(listener);
 
 	}
 
@@ -146,7 +145,6 @@ public class TableModelForm extends AbstractTableModel {
 	}
 
 	public void removeTableModelListener(TableModelListener listener) {
-		listeners.remove(listener);
 
 	}
 
