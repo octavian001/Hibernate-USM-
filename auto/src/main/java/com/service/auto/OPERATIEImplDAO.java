@@ -13,6 +13,28 @@ import org.hibernate.criterion.Restrictions;
 
 public class OPERATIEImplDAO {
 
+	// extrag toate operatiile dupa ID_BON, pentru a putea incarca in tabela
+	// principala toate operatiile pentru un anumit ID_BON
+	public ArrayList<OPERATIE> getAllOperFK(int i) {
+		ArrayList<OPERATIE> results = null;
+		Session session = null;
+		session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+
+		try {
+			org.hibernate.Query query = session.createQuery("SELECT "
+					+ " o FROM OPERATIE o  JOIN o.bon b WHERE b.id_bon = :t ");
+			query.setParameter("t", i);
+			results = (ArrayList<OPERATIE>) query.list();
+
+		} catch (Exception ex) {
+		}
+		if (session != null && session.isOpen()) {
+			session.close();
+		}
+		return results;
+	}
+
 	// adaugarea unei noi inregistrari
 	public boolean addOperatie(OPERATIE m) {
 		Session session = null;
@@ -124,48 +146,47 @@ public class OPERATIEImplDAO {
 			return false;
 		}
 	}
-		
-		/*Search Methods*/
-		public Collection<OPERATIE> searchByDenumire(String den) {
-			Session session = null;
-			List<OPERATIE> m = new ArrayList<OPERATIE>();
 
-			try {
-				session = HibernateUtil.getSessionFactory().openSession();
-				session.beginTransaction();
-				Criteria criteria = session.createCriteria(OPERATIE.class);
-				m = criteria.add(Restrictions.ilike("den_oper", "%" + den + "%"))
-						.list();
+	/* Search Methods */
+	public Collection<OPERATIE> searchByDenumire(String den) {
+		Session session = null;
+		List<OPERATIE> m = new ArrayList<OPERATIE>();
 
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "Nu ati selectat cimpul",
-						" Eroare", JOptionPane.OK_OPTION);
-			} finally {
-				if (session.isOpen() && session != null)
-					session.close();
-			}
-			return m;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			Criteria criteria = session.createCriteria(OPERATIE.class);
+			m = criteria.add(Restrictions.ilike("den_oper", "%" + den + "%"))
+					.list();
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Nu ati selectat cimpul",
+					" Eroare", JOptionPane.OK_OPTION);
+		} finally {
+			if (session.isOpen() && session != null)
+				session.close();
 		}
+		return m;
+	}
 
-		public Collection<OPERATIE> searchByPret(int p) {
-			Session session = null;
-			List<OPERATIE> m = new ArrayList<OPERATIE>();
+	public Collection<OPERATIE> searchByPret(int p) {
+		Session session = null;
+		List<OPERATIE> m = new ArrayList<OPERATIE>();
 
-			try {
-				session = HibernateUtil.getSessionFactory().openSession();
-				session.beginTransaction();
-				m = session.createQuery("from OPERATIE where pret_oper like :p")
-						.setString("p", "%" + p + "%").list();
-			} catch (Exception e) {
-				
-				JOptionPane.showMessageDialog(null, "Nu ati selectat cimpul",
-						" Eroare", JOptionPane.OK_OPTION);
-			} finally {
-				if (session.isOpen() && session != null)
-					session.close();
-			}
-			return m;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			m = session.createQuery("from OPERATIE where pret_oper like :p")
+					.setString("p", "%" + p + "%").list();
+		} catch (Exception e) {
+
+			JOptionPane.showMessageDialog(null, "Nu ati selectat cimpul",
+					" Eroare", JOptionPane.OK_OPTION);
+		} finally {
+			if (session.isOpen() && session != null)
+				session.close();
 		}
-
+		return m;
+	}
 
 }

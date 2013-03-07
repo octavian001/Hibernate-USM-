@@ -12,28 +12,6 @@ import org.hibernate.Session;
 
 public class BONImplDAO {
 	
-
-	public ArrayList<OPERATIE> getAllOperFK(int i) {
-		 ArrayList<OPERATIE> results = null;
-		Session session = null;
-		session = HibernateUtil.getSessionFactory().openSession();
-		session.beginTransaction();
-		
-		try{
-		org.hibernate.Query query = session.createQuery("SELECT "
-				+ " o FROM OPERATIE o  JOIN o.bon b WHERE b.id_bon = :t ");
-		query.setParameter("t", i);
-	    results = (ArrayList<OPERATIE>) query
-				.list();
-		
-		}catch(Exception ex){}
-			if(session != null && session.isOpen()){
-				session.close();
-			}
-	return results;
-	}
-
-	
 	//adaugarea unei noi inregistrari 
 		public  boolean addBon(BON m) {
 			Session session = null;

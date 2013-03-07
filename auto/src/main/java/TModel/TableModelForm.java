@@ -1,5 +1,6 @@
 package TModel;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,20 +24,22 @@ public class TableModelForm extends AbstractTableModel {
 	private List<PIESE> piese;
 	private List<OPERATIE> operatie;
 	private List<BON> bon;
+	private List<String> operString;
 
 	private BON m;
 	
 	public TableModelForm(/*
-						 * List<MODEL> model, List<MARCA> marca, List<AUTO>
-						 * auto, List<PROPRIETAR> proprietar, List<MECANIC>
-						 * mecanic, List<PIESE> piese, List<OPERATIE> operatie,
-						 */List<BON> bon) {
+						  List<MODEL> model, List<MARCA> marca, List<AUTO>
+						  auto, List<PROPRIETAR> proprietar, List<MECANIC>
+						  mecanic, List<PIESE> piese, List<OPERATIE> operatie,
+						 */List<BON> bon,List<String> operString) {
 		/*
 		 * this.model = model; this.marca = marca; this.auto = auto;
 		 * this.proprietar = proprietar; this.mecanic = mecanic; this.piese =
 		 * piese; this.operatie = operatie;
 		 */
 		this.bon = bon;
+		this.operString = operString;
 	}
 
 	public void addTableModelListener(TableModelListener listener) {
@@ -130,7 +133,7 @@ public class TableModelForm extends AbstractTableModel {
 		case 12:
 			return "";
 		case 13:
-			return "";
+			return operString.get(rowIndex).toString();
 		case 14:
 			return bon.get(rowIndex).getData_bon();
 		case 15:

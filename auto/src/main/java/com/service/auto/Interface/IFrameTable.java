@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -37,6 +38,9 @@ public class IFrameTable extends JFrame {
 	  private static JScrollPane scrollPane;
 	  private static JPanel panel_table;
 	  private static ArrayList<OPERATIE> oper =null;
+	  private static List<String> operString = new ArrayList<String>();
+	  private static String[] v = new String[100];
+	  private static String str = "";
 	  
 	public static JInternalFrame getTableForm() {
 		
@@ -51,9 +55,26 @@ public class IFrameTable extends JFrame {
 			tableForm.setLocation(30, 20);
 			tableForm.setVisible(true);
 			
+			
+			
 			bon = (ArrayList<BON>) Factory.getInstance().getBonDAO().getAllBon();
 			
-			model = new TableModelForm(bon);
+			for (int i = 0; i < bon.size(); i++) {
+				oper = Factory.getInstance().getOperatieDAO()
+						.getAllOperFK(bon.get(i).getId_bon());	
+				System.out.println(oper.size());
+				if (oper.size() != 0) {
+					for (int j = 0; j < oper.size(); j++) {
+					  str = str + oper.get(j).getDen_oper();
+						 }
+							operString.add(str);
+					}
+				}
+			
+			
+			System.out.println("Marimea" + operString.size());
+
+			model = new TableModelForm(bon,operString);
 			t = new JTable(model);
 			
 			/*panel_table = new JPanel(new BorderLayout());
